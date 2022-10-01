@@ -6,11 +6,17 @@ import Chat from './pages/Chat/Chat';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 
-import './App.css'
+import './App.css';
 
 const App = () => {
 	return (
-		<div className='container'>
+		<div
+			className={
+				window.location.href === 'http://localhost:3000/chat'
+					? 'container chat-home'
+					: 'container main-home'
+			}
+		>
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/home' element={<Home />} />

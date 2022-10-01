@@ -23,6 +23,14 @@
 	padding: 1rem;
 }
 
+.chat-home {
+	height: calc(100vh - 2rem);
+}
+
+.main-home {
+	height: auto;
+}
+
 .blur {
 	position: absolute;
 	width: 22rem;
