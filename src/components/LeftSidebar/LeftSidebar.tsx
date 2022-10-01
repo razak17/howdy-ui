@@ -1,4 +1,4 @@
-import FollowersCard from '../../FollowersCard/FollowersCard';
+import FollowersCard from '../FollowersCard/FollowersCard';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import Searchbar from '../Searchbar/Searchbar';
 import './LeftSidebar.css';
