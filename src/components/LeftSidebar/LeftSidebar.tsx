@@ -1,10 +1,11 @@
-import FollowersCard from "../../FollowersCard/FollowersCard";
-import ProfileCard from "../ProfileCard/ProfileCard";
-import Searchbar from "../Searchbar/Searchbar";
+import FollowersCard from '../../FollowersCard/FollowersCard';
+import ProfileCard from '../ProfileCard/ProfileCard';
+import Searchbar from '../Searchbar/Searchbar';
+import './LeftSidebar.css';
 
 const LeftSidebar = () => {
 	return (
-		<div>
+		<div className='left-side-bar'>
 			<Searchbar />
 			<ProfileCard />
 			<FollowersCard />

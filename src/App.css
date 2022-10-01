@@ -23,6 +23,12 @@
 	padding: 1rem;
 }
 
+.flex-center {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .chat-home {
 	height: calc(100vh - 2rem);
 }
