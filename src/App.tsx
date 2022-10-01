@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
 
 import NotFoundPage from './pages/404/404';
 import Auth from './pages/Auth/Auth';
@@ -10,22 +11,24 @@ import './App.css';
 
 const App = () => {
 	return (
-		<div
-			className={
-				window.location.href === 'http://localhost:3000/chat'
-					? 'container chat-home'
-					: 'container main-home'
-			}
-		>
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/home' element={<Home />} />
-				<Route path='/auth' element={<Auth />} />
-				<Route path='/profile/:id' element={<Profile />} />
-				<Route path='/chat' element={<Chat />} />
-				<Route path='*' element={<NotFoundPage />} />
-			</Routes>
-		</div>
+		<MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
+			<div
+				className={
+					window.location.href === 'http://localhost:3000/chat'
+						? 'container chat-home'
+						: 'container main-home'
+				}
+			>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/home' element={<Home />} />
+					<Route path='/auth' element={<Auth />} />
+					<Route path='/profile/:id' element={<Profile />} />
+					<Route path='/chat' element={<Chat />} />
+					<Route path='*' element={<NotFoundPage />} />
+				</Routes>
+			</div>
+		</MantineProvider>
 	);
 };
 

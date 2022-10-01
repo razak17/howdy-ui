@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.4",
     "@iconscout/react-unicons": "^1.1.6",
     "@mantine/core": "^5.4.2",
     "@mantine/hooks": "^5.4.2",
