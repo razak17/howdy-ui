@@ -78,3 +78,33 @@
 ::-webkit-scrollbar {
 	display: none;
 }
+
+.profile-link {
+	text-decoration: none;
+	color: var(--orange);
+}
+
+/* Components */
+.left-side-bar {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+	overflow: auto;
+  padding-right: 10px;
+}
+
+.main-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	height: 100vh;
+	overflow: auto;
+  padding-right: 10px;
+}
+
+.posts {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}

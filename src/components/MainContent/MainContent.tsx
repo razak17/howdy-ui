@@ -1,6 +1,5 @@
 import CreatePost from '../CreatePost/CreatePost';
 import Posts from '../Posts/Posts';
-import './MainContent.css';
 
 const MainContent = () => {
 	return (
