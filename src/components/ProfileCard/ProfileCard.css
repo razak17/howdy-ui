@@ -68,15 +68,10 @@
 	gap: 0.75rem;
 }
 
-.follow-status > hr {
-	width: 85%;
-	border: 1px solid var(--hr-color);
-}
-
 .follow-status > div {
 	display: flex;
-	gap: 1rem;
-	width: 80%;
+  margin-bottom: 1rem;
+	width: 90%;
 	justify-content: space-around;
 	align-items: center;
 }

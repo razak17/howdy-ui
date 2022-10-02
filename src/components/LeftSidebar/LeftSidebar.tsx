@@ -7,7 +7,7 @@ const LeftSidebar = () => {
 	return (
 		<div className='left-side-bar'>
 			<Searchbar />
-			<ProfileCard />
+			<ProfileCard location='home' />
 			<FollowersCard />
 		</div>
 	);

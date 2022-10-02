@@ -3,7 +3,7 @@ import coverImg from '../../assets/cover.jpg';
 import profileImg from '../../assets/profile.jpg';
 import './ProfileCard.css';
 
-const ProfileCard = () => {
+const ProfileCard = ({ location }: { location: 'home' | 'profile' }) => {
 	return (
 		<div className='profile-card'>
 			<div className='profile-imgs'>
@@ -25,13 +25,24 @@ const ProfileCard = () => {
 						<span>4</span>
 						<span>Following</span>
 					</div>
+					{location === 'profile' && (
+						<>
+							<div className='vl'></div>
+							<div className='follow'>
+								<span>7</span>
+								<span>Posts</span>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
-			<span>
-				<Link to={`/profile/jane123`} className='profile-link'>
-					My Profile
-				</Link>
-			</span>
+			{location === 'home' && (
+				<span>
+					<Link to={`/profile/jane123`} className='profile-link'>
+						My Profile
+					</Link>
+				</span>
+			)}
 		</div>
 	);
 };
