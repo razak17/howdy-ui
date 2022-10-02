@@ -54,7 +54,7 @@ const LoginForm = () => {
 			</div>
 			<div className='check-auth'>
 				<Link to='/register'>
-					<span>New user? Register here</span>
+					<span>New user?</span>
 				</Link>
 			</div>
 			<button className='button info-button' type='submit' disabled={isSubmitting}>
