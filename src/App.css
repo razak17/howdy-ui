@@ -91,6 +91,15 @@
 	grid-template-columns: 20rem auto 20rem;
 	gap: 1rem;
 }
+.notfound-container {
+	display: flex;
+  height: 100vh;
+}
+
+.container h2 {
+  margin: auto;
+  font-size: 3rem;
+}
 
 /* Components */
 .left-side-bar {
