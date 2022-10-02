@@ -1,16 +1,17 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoginFormSchema, LoginFormSchemaType } from '../../utils/formSchema';
-import { Dispatch, SetStateAction } from 'react';
-import { Input } from '../../components/Input/Input';
-import './Auth.css';
-import { QueryKeys } from '../../lib/types';
-import { login } from '../../lib/api/auth';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LoginFormSchema, LoginFormSchemaType } from '../../utils/formSchema';
 
-const Login = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>> }) => {
+import { login } from '../../lib/api/auth';
+import { Input } from '../../components/Input/Input';
+import { QueryKeys } from '../../lib/types';
+import Auth from './Auth';
+import './Auth.css';
+
+const LoginForm = () => {
 	const navigate = useNavigate();
 	const state = useLocation();
 	const queryClient = useQueryClient();
@@ -34,7 +35,6 @@ const Login = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>>
 		console.log(data);
 		mutation.mutate(data);
 	};
-
 	return (
 		<form className='info-form auth-form info-auth' onSubmit={handleSubmit(onSubmit)}>
 			<h1>Login</h1>
@@ -50,20 +50,23 @@ const Login = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>>
 					error={errors.password}
 				/>
 			</div>
-			<div>
-				<span
-					className='check-auth'
-					onClick={() => {
-						setIsSignUp((prev) => !prev);
-					}}
-				>
-					New user? Register here
-				</span>
-				<button className='button info-button' type='submit' disabled={isSubmitting}>
-					{isSubmitting ? 'submitting...' : 'Login'}
-				</button>
+			<div className='check-auth'>
+				<Link to='/register'>
+					<span>New user? Register here</span>
+				</Link>
 			</div>
+			<button className='button info-button' type='submit' disabled={isSubmitting}>
+				{isSubmitting ? 'submitting...' : 'Login'}
+			</button>
 		</form>
+	);
+};
+
+const Login = () => {
+	return (
+		<Auth>
+			<LoginForm />
+		</Auth>
 	);
 };
 

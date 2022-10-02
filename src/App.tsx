@@ -11,6 +11,8 @@ import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 
 import './App.css';
+import Register from './pages/Auth/Register';
+import Login from './pages/Auth/Login';
 
 const App = () => {
 	return (
@@ -57,10 +59,18 @@ const App = () => {
 							}
 						/>
 						<Route
-							path='/auth'
+							path='/register'
 							element={
 								<AuthRoute>
-									<Auth />
+									<Register />
+								</AuthRoute>
+							}
+						/>
+						<Route
+							path='/login'
+							element={
+								<AuthRoute>
+									<Login />
 								</AuthRoute>
 							}
 						/>

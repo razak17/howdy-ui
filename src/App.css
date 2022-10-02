@@ -146,7 +146,7 @@
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	padding: 1rem 2rem;
+	padding: 2rem;
 }
 
 .info-auth {
@@ -187,14 +187,15 @@
 	padding-top: 0.6rem;
 }
 
-.check-auth {
+.check-auth > a {
 	display: flex;
 	justify-content: flex-end;
 	font-size: 14px;
 	cursor: pointer;
 	color: #6f6f6f;
+	text-decoration: none;
 }
 
-.check-auth:hover {
+.check-auth > a:hover {
 	color: var(--orange);
 }

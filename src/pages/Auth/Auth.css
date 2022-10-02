@@ -50,7 +50,7 @@
 .auth-form {
 	background-color: var(--card-color);
 	border-radius: 1rem;
-	padding: 1rem;
+	padding: 2rem;
 }
 
 .auth-form > div {

@@ -18,7 +18,7 @@ const UserInfo = () => {
 	const mutation = useMutation<string, AxiosError, Parameters<typeof logout>>(logout, {
 		onSuccess: () => {
 			queryClient.invalidateQueries([QueryKeys.ME]);
-			navigate('/auth', { replace: true });
+			navigate('/login', { replace: true });
 		}
 	});
 

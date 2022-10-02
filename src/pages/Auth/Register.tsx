@@ -1,15 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AxiosError } from 'axios';
-import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
+import { Link } from 'react-router-dom';
 
 import { Input } from '../../components/Input/Input';
 import { register } from '../../lib/api/auth';
 import { QueryKeys } from '../../lib/types';
 import { RegisterFormSchema, RegisterFormSchemaType } from '../../utils/formSchema';
+import Auth from './Auth';
 
-const Register = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>> }) => {
+const RegisterForm = () => {
 	const queryClient = useQueryClient();
 
 	const {
@@ -22,7 +23,6 @@ const Register = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolea
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof register>['0']>(register, {
 		onSuccess: () => {
-			setIsSignUp(false);
 			queryClient.invalidateQueries([QueryKeys.ME]);
 		}
 	});
@@ -85,20 +85,23 @@ const Register = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolea
 					error={errors.confirmPassword}
 				/>
 			</div>
-			<div>
-				<span
-					className='check-auth'
-					onClick={() => {
-						setIsSignUp((prev) => !prev);
-					}}
-				>
-					Already have an account?
-				</span>
-				<button className='button info-button' type='submit' disabled={isSubmitting}>
-					{isSubmitting ? 'submitting...' : 'Register'}
-				</button>
+			<div className='check-auth'>
+				<Link to='/login'>
+					<span>Already have an account?</span>
+				</Link>
 			</div>
+			<button className='button info-button' type='submit' disabled={isSubmitting}>
+				{isSubmitting ? 'submitting...' : 'Register'}
+			</button>
 		</form>
+	);
+};
+
+const Register = () => {
+	return (
+		<Auth>
+			<RegisterForm />
+		</Auth>
 	);
 };
 

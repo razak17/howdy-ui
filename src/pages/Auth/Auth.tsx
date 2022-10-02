@@ -1,11 +1,6 @@
-import { useState } from 'react';
 import Logo from '../../assets/logo.png';
-import Login from './Login';
-import Register from './Register';
 
-const Auth = () => {
-	const [isSignUp, setIsSignUp] = useState(false);
-
+const Auth = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div className='auth'>
 			<div className='auth-left'>
@@ -16,9 +11,7 @@ const Auth = () => {
 					<p>Explore the ideas throughout the world!</p>
 				</div>
 			</div>
-			<div className='auth-right'>
-				{isSignUp ? <Register setIsSignUp={setIsSignUp} /> : <Login setIsSignUp={setIsSignUp} />}
-			</div>
+			<div className='auth-right'>{children}</div>
 		</div>
 	);
 };
