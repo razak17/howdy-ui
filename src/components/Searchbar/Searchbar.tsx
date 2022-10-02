@@ -1,4 +1,5 @@
 import { UilSearch } from '@iconscout/react-unicons';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/logo.png';
 import './Searchbar.css';
@@ -7,7 +8,9 @@ const Searchbar = () => {
 	return (
 		<div className='search-bar'>
 			<div className='flex-center'>
-				<img src={Logo} alt='' />
+				<Link to='/home'>
+					<img src={Logo} alt='' />
+				</Link>
 			</div>
 			<div className='search'>
 				<input type='text' className='search-input' placeholder='Find users or posts' />
