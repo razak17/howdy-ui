@@ -22,8 +22,8 @@ const FollowersCard = ({ location }: { location?: string }) => {
 				<div>
 					<img src={profileImg} alt='profileImage' className='profile-image' />
 					<div className='name'>
-						<span>username</span>
-						<span>email</span>
+						<span>Jane Doe</span>
+						<span>@jdoe</span>
 					</div>
 				</div>
 				<button
@@ -37,8 +37,8 @@ const FollowersCard = ({ location }: { location?: string }) => {
 				<div>
 					<img src={profileImg} alt='profileImage' className='profile-image' />
 					<div className='name'>
-						<span>username</span>
-						<span>email</span>
+						<span>Jane Doe</span>
+						<span>@jdoe</span>
 					</div>
 				</div>
 				<button

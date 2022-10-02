@@ -22,7 +22,7 @@ const Post = ({ data }: { data: any }) => {
 			<div className='detail'>
 				<div>
 					<Link to='/profile/1' className='profile-link'>
-						<p>@name</p>
+						<p>@jdoe</p>
 					</Link>
 				</div>
 				<span>description</span>

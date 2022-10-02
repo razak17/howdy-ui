@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 
 import NotFoundPage from './pages/404/404';
@@ -10,6 +10,8 @@ import Profile from './pages/Profile/Profile';
 import './App.css';
 
 const App = () => {
+	const user = 'zod';
+
 	return (
 		<MantineProvider withGlobalStyles withNormalizeCSS>
 			<div
@@ -22,7 +24,7 @@ const App = () => {
 				<div className='blur' style={{ top: '-18%', right: '0' }}></div>
 				<div className='blur' style={{ top: '36%', left: '-8rem' }}></div>
 				<Routes>
-					<Route path='/' element={<Home />} />
+					<Route path='/' element={user ? <Navigate to='home' /> : <Navigate to='auth' />} />
 					<Route path='/home' element={<Home />} />
 					<Route path='/auth' element={<Auth />} />
 					<Route path='/profile/:id' element={<Profile />} />
