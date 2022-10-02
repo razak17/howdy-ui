@@ -146,8 +146,7 @@
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	padding: 2rem;
-	width: 500px;
+	padding: 1rem 2rem;
 }
 
 .info-input {
@@ -155,21 +154,27 @@
 	outline: none;
 	background-color: var(--input-color);
 	border-radius: 8px;
-	padding: 1rem;
-	font-size: 14px;
+	padding: .8rem 1rem;
+	font-size: 12px;
 	flex: 1;
+}
+
+.info-button {
+	padding: .8rem 1rem;
+	margin-top: 1rem;
+	width: 100%;
 }
 
 .form-item {
 	display: flex;
 	gap: 1rem;
-	width: 90%;
+	width: 100%;
 }
 
-.info-button {
+.form-input {
+	display: flex;
+	flex-direction: column;
 	width: 100%;
-	padding: 1rem;
-	margin-top: 1rem;
 }
 
 .error {
@@ -188,10 +193,4 @@
 
 .check-auth:hover {
 	color: var(--orange);
-}
-
-.form-input {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
 }

@@ -1,5 +1,3 @@
-import './404.css';
-
 const NotFoundPage = () => {
 	return (
 		<div className='notfound-container'>
