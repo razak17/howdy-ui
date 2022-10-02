@@ -36,14 +36,6 @@
 	box-shadow: var(--profile-shadow);
 }
 
-.profile-name {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-top: 3rem;
-	gap: 10px;
-}
-
 .profile-img > img:nth-of-type(1) {
 	width: 100%;
 }
@@ -56,8 +48,20 @@
 	box-shadow: var(--profile-shadow);
 }
 
+.profile-name {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 3rem;
+	gap: 10px;
+}
+
 .profile-name > span:nth-of-type(1) {
 	font-weight: bold;
+}
+
+.profile-name > span:nth-of-type(2) {
+	color: var(--gray);
 }
 
 .follow-status {
@@ -70,7 +74,7 @@
 
 .follow-status > div {
 	display: flex;
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 	width: 90%;
 	justify-content: space-around;
 	align-items: center;
@@ -83,6 +87,7 @@
 	align-items: center;
 	justify-content: center;
 }
+
 .follow > span:nth-of-type(1) {
 	font-weight: bold;
 }
