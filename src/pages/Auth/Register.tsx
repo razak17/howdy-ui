@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { AxiosError } from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Input, Error } from '../../components/Input/Input';
 import { register } from '../../lib/api/auth';
@@ -11,6 +11,7 @@ import { RegisterFormSchema, RegisterFormSchemaType } from '../../utils/formSche
 import Auth from './Auth';
 
 const RegisterForm = () => {
+	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 
 	const {
@@ -23,12 +24,12 @@ const RegisterForm = () => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof register>['0']>(register, {
 		onSuccess: () => {
+      navigate('/login', { replace: true });
 			queryClient.invalidateQueries([QueryKeys.ME]);
 		}
 	});
 
 	const onSubmit: SubmitHandler<RegisterFormSchemaType> = async (data) => {
-		console.log(data);
 		mutation.mutate(data);
 	};
 

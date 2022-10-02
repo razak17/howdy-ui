@@ -32,7 +32,6 @@ const LoginForm = () => {
 	});
 
 	const onSubmit: SubmitHandler<LoginFormSchemaType> = async (data) => {
-		console.log(data);
 		mutation.mutate(data);
 	};
 	return (
