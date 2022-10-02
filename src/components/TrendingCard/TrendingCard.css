@@ -1,0 +1,32 @@
+.trending-card {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	background-color: var(--card-color);
+	padding: 1rem;
+	border-radius: 1rem;
+}
+
+.trending-card > h3 {
+  padding: 0 1rem;
+}
+
+.trend {
+	display: flex;
+	flex-direction: column;
+  padding: .4rem 1rem;
+  border-radius: 8px;
+}
+
+.trend:hover {
+  background-color: #efefdf;
+}
+
+.trend > span:nth-of-type(1) {
+	font-weight: bold;
+	cursor: pointer;
+}
+.trend > span:nth-of-type(2) {
+	font-size: 12px;
+  color: #6f6f6f
+}

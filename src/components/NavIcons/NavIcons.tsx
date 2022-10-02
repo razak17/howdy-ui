@@ -8,12 +8,12 @@ import Comment from '../../assets/comment.png';
 const NavIcons = () => {
 	return (
 		<div className='nav-icons'>
-			<Link to='../home'>
+			<Link to='/home'>
 				<img src={Home} alt='home' />
 			</Link>
 			<UilSetting />
 			<img src={Notif} alt='notification' />
-			<Link to='../chat'>
+			<Link to='/chat'>
 				<img src={Comment} alt='comment' />
 			</Link>
 		</div>
