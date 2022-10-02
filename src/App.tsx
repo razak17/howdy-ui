@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 
 import PrivateRoute from './components/AuthRoute/PrivateRoute';
+import AuthRoute from './components/AuthRoute/AuthRoute';
 import { MeContextProvider } from './context/me';
 import NotFoundPage from './pages/404/404';
 import Auth from './pages/Auth/Auth';
@@ -63,7 +64,14 @@ const App = () => {
 								</PrivateRoute>
 							}
 						/>
-						<Route path='/auth' element={<Auth />} />
+						<Route
+							path='/auth'
+							element={
+								<AuthRoute>
+									<Auth />
+								</AuthRoute>
+							}
+						/>
 						<Route path='*' element={<NotFoundPage />} />
 					</Routes>
 				</div>

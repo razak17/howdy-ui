@@ -16,7 +16,6 @@ const MeContext = createContext<{
 
 const MeContextProvider = ({ children }: { children: ReactNode }) => {
 	const { data, refetch, isLoading } = useQuery([QueryKeys.ME], getMe);
-  console.log({data})
 
 	return (
 		<MeContext.Provider value={{ user: data as IUser, refetch }}>
