@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LoginFormSchema, LoginFormSchemaType } from '../../utils/formSchema';
 
 import { login } from '../../lib/api/auth';
-import { Input } from '../../components/Input/Input';
+import { Input, Error } from '../../components/Input/Input';
 import { QueryKeys } from '../../lib/types';
 import Auth from './Auth';
 import './Auth.css';
@@ -38,6 +38,9 @@ const LoginForm = () => {
 	return (
 		<form className='info-form auth-form info-auth' onSubmit={handleSubmit(onSubmit)}>
 			<h1>Login</h1>
+			{(mutation?.error?.response?.data as string) ? (
+				<Error error={mutation?.error?.response?.data as string} />
+			) : null}
 			<div className='form-item'>
 				<Input required type='text' placeholder='Email' {...loginForm('email')} error={errors.email} />
 			</div>

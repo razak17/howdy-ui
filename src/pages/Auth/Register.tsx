@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 
-import { Input } from '../../components/Input/Input';
+import { Input, Error } from '../../components/Input/Input';
 import { register } from '../../lib/api/auth';
 import { QueryKeys } from '../../lib/types';
 import { RegisterFormSchema, RegisterFormSchemaType } from '../../utils/formSchema';
@@ -35,6 +35,9 @@ const RegisterForm = () => {
 	return (
 		<form className='info-form auth-form info-auth' onSubmit={handleSubmit(onSubmit)}>
 			<h1>Register</h1>
+			{(mutation?.error?.response?.data as string) ? (
+				<Error error={mutation?.error?.response?.data as string} />
+			) : null}
 			<div className='form-item'>
 				<Input
 					required
