@@ -4,7 +4,7 @@ import { useState } from 'react';
 import profileImg from '../../assets/profile.jpg';
 import './FollowersCard.css';
 
-const FollowersCard = ({ location }: { location: string }) => {
+const FollowersCard = ({ location }: { location?: string }) => {
 	const [modalOpened, setModalOpened] = useState(false);
 
 	const { colors, colorScheme } = useMantineTheme();
@@ -22,8 +22,23 @@ const FollowersCard = ({ location }: { location: string }) => {
 				<div>
 					<img src={profileImg} alt='profileImage' className='follower-image' />
 					<div className='name'>
-						<span>firstname</span>
-						<span>lastname</span>
+						<span>username</span>
+						<span>email</span>
+					</div>
+				</div>
+				<button
+					className={following ? 'button fc-button unfollow-button' : 'button fc-button'}
+					onClick={handleFollow}
+				>
+					{following ? 'Unfollow' : 'Follow'}
+				</button>
+			</div>
+			<div className='follower'>
+				<div>
+					<img src={profileImg} alt='profileImage' className='follower-image' />
+					<div className='name'>
+						<span>username</span>
+						<span>email</span>
 					</div>
 				</div>
 				<button
