@@ -59,3 +59,22 @@ export const trending = [
 		shares: 20
 	}
 ];
+
+export const chats = [
+	{
+		_id: '63371990ba70ebc3ad26c670',
+		creatorId: '633653b821bfe1c9ee7f5e1d',
+		members: ['633653b821bfe1c9ee7f5e1d', '6336510f3f5928acd9f6cafb'],
+		createdAt: '2022-09-30T16:30:08.447Z',
+		updatedAt: '2022-09-30T16:30:08.447Z',
+		__v: 0
+	},
+	{
+		_id: '63371c8c072de029994a42d6',
+		creatorId: '6336510f3f5928acd9f6cafb',
+		members: ['6336510f3f5928acd9f6cafb', '633653b821bfe1c9ee7f5e1d'],
+		createdAt: '2022-09-30T16:42:52.100Z',
+		updatedAt: '2022-09-30T16:42:52.100Z',
+		__v: 0
+	}
+];
