@@ -43,8 +43,8 @@
 	-moz-text-fill-color: transparent;
 }
 
-.web-name > h6 {
-	font-size: 0.85rem;
+.web-name > p {
+	font-size: 0.9rem;
 }
 
 .auth-form {

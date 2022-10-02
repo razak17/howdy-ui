@@ -10,7 +10,7 @@ import Profile from './pages/Profile/Profile';
 import './App.css';
 
 const App = () => {
-	const user = 'zod';
+	const user = '';
 
 	return (
 		<MantineProvider withGlobalStyles withNormalizeCSS>
