@@ -1,26 +1,16 @@
-import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import coverImg from '../../assets/cover.jpg';
 import profileImg from '../../assets/profile.jpg';
-import { useMe } from '../../context/me';
-import { getUser } from '../../lib/api/users';
-import { IUser, QueryKeys } from '../../lib/types';
-import Loader from '../Loader/Loader';
+import { IUser } from '../../lib/types';
 import './ProfileCard.css';
 
-const ProfileCard = ({ location }: { location: 'home' | 'profile' }) => {
-	const { me } = useMe();
-
-	const { data: user, isLoading } = useQuery([QueryKeys.USER, me?._id], () => getUser(`${me?._id}`));
-
-	if (isLoading) {
-		return (
-			<div className='profile-card'>
-				<Loader />;
-			</div>
-		);
-	}
-
+const ProfileCard = ({
+	location,
+	user
+}: {
+	location: 'home' | 'profile';
+    user: IUser;
+}) => {
 	return (
 		<div className='profile-card'>
 			<div className='profile-imgs'>
