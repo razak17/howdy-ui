@@ -11,7 +11,7 @@ import './App.css';
 
 const App = () => {
 	return (
-		<MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
+		<MantineProvider withGlobalStyles withNormalizeCSS>
 			<div
 				className={
 					window.location.href === 'http://localhost:3000/chat'
