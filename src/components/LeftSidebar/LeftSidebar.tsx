@@ -10,12 +10,12 @@ import { getUser } from '../../lib/api/users';
 const LeftSidebar = ({ location }: { location: 'home' | 'profile' }) => {
 	const { me } = useMe();
 
-	const { data: user } = useQuery([QueryKeys.USER, me?._id], () => getUser(`${me?._id}`));
+	const { data: user, isLoading } = useQuery([QueryKeys.USER, me?._id], () => getUser(`${me?._id}`));
 
 	return (
 		<div className='left-side-bar'>
 			<Searchbar />
-			{user && location === 'home' && <ProfileCard user={user} location='home' />}
+			{location === 'home' && <ProfileCard location='home' />}
 			{user && location === 'profile' && <UserInfo user={user} />}
 			<FollowersCard />
 		</div>
