@@ -20,7 +20,7 @@ const FollowersCard = ({ location }: { location?: string }) => {
 			<h3>People you may know</h3>
 			<div className='follower'>
 				<div>
-					<img src={profileImg} alt='profileImage' className='follower-image' />
+					<img src={profileImg} alt='profileImage' className='profile-image' />
 					<div className='name'>
 						<span>username</span>
 						<span>email</span>
@@ -35,7 +35,7 @@ const FollowersCard = ({ location }: { location?: string }) => {
 			</div>
 			<div className='follower'>
 				<div>
-					<img src={profileImg} alt='profileImage' className='follower-image' />
+					<img src={profileImg} alt='profileImage' className='profile-image' />
 					<div className='name'>
 						<span>username</span>
 						<span>email</span>

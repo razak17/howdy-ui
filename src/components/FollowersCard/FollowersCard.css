@@ -19,12 +19,6 @@
 	gap: 10px;
 }
 
-.follower-image {
-	width: 3.2rem;
-	height: 3.2rem;
-	border-radius: 50%;
-}
-
 .name {
 	display: flex;
 	flex-direction: column;
