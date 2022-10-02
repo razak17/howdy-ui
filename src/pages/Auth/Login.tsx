@@ -36,7 +36,7 @@ const Login = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>>
 	};
 
 	return (
-		<form className='info-form auth-form' onSubmit={handleSubmit(onSubmit)}>
+		<form className='info-form auth-form info-auth' onSubmit={handleSubmit(onSubmit)}>
 			<h1>Login</h1>
 			<div className='form-item'>
 				<Input required type='text' placeholder='Email' {...loginForm('email')} error={errors.email} />

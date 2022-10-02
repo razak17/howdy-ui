@@ -93,12 +93,12 @@
 }
 .notfound-container {
 	display: flex;
-  height: 100vh;
+	height: 100vh;
 }
 
 .container h2 {
-  margin: auto;
-  font-size: 3rem;
+	margin: auto;
+	font-size: 3rem;
 }
 
 /* Components */
@@ -149,18 +149,22 @@
 	padding: 1rem 2rem;
 }
 
+.info-auth {
+	width: 500px;
+}
+
 .info-input {
 	border: none;
 	outline: none;
 	background-color: var(--input-color);
 	border-radius: 8px;
-	padding: .8rem 1rem;
+	padding: 0.8rem 1rem;
 	font-size: 12px;
 	flex: 1;
 }
 
 .info-button {
-	padding: .8rem 1rem;
+	padding: 0.8rem 1rem;
 	margin-top: 1rem;
 	width: 100%;
 }

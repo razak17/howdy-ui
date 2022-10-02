@@ -33,7 +33,7 @@ const Register = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolea
 	};
 
 	return (
-		<form className='info-form auth-form' onSubmit={handleSubmit(onSubmit)}>
+		<form className='info-form auth-form info-auth' onSubmit={handleSubmit(onSubmit)}>
 			<h1>Register</h1>
 			<div className='form-item'>
 				<Input

@@ -1,18 +1,9 @@
 import axios from 'axios';
+import { auth, authBase } from './base';
 import { ILogin, IRegister } from '../types';
 
-const base = import.meta.env.VITE_PUBLIC_API_ENDPOINT;
-
-const userBase = `${base}/users`;
-const authBase = `${base}/auth`;
-
-const auth = axios.create({
-	baseURL: base,
-	withCredentials: true
-});
-
 export const register = async (payload: IRegister) => {
-	const res = await axios.post(`${userBase}/register`, payload);
+	const res = await axios.post(`${authBase}/register`, payload);
 	return res.data;
 };
 
