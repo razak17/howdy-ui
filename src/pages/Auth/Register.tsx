@@ -1,10 +1,26 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AxiosError } from 'axios';
 import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+
 import { Input } from '../../components/Input/Input';
+import { register } from '../../lib/api/auth';
+import { QueryKeys } from '../../lib/types';
 import { RegisterFormSchema, RegisterFormSchemaType } from '../../utils/formSchema';
 
 const Register = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>> }) => {
+	const navigate = useNavigate();
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation<string, AxiosError, Parameters<typeof register>['0']>(register, {
+		onSuccess: () => {
+			navigate('/login', { replace: true });
+			queryClient.invalidateQueries([QueryKeys.ME]);
+		}
+	});
+
 	const {
 		register: registerForm,
 		handleSubmit,
@@ -15,6 +31,7 @@ const Register = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolea
 
 	const onSubmit: SubmitHandler<RegisterFormSchemaType> = async (data) => {
 		console.log(data);
+		mutation.mutate(data);
 	};
 
 	return (
