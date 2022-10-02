@@ -41,14 +41,6 @@ const App = () => {
 							}
 						/>
 						<Route
-							path='/home'
-							element={
-								<PrivateRoute>
-									<Home />
-								</PrivateRoute>
-							}
-						/>
-						<Route
 							path='/profile/:id'
 							element={
 								<PrivateRoute>

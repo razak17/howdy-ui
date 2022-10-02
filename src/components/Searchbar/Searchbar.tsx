@@ -8,7 +8,7 @@ const Searchbar = () => {
 	return (
 		<div className='search-bar'>
 			<div className='flex-center'>
-				<Link to='/home'>
+				<Link to='/'>
 					<img src={Logo} alt='' />
 				</Link>
 			</div>
