@@ -5,7 +5,7 @@ import RightSidebar from '../../components/RightSidebar/RightSidebar';
 const Home = () => {
 	return (
 		<div className='home-container'>
-			<LeftSidebar />
+			<LeftSidebar location='home' />
 			<MainContent />
 			<RightSidebar />
 		</div>

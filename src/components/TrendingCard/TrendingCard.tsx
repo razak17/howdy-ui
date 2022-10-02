@@ -4,7 +4,7 @@ import './TrendingCard.css';
 const TrendingCard = () => {
 	return (
 		<div className='trending-card'>
-			<h3>Trends for your</h3>
+			<h3>Trends for you</h3>
 
 			{trending.map((trend, id) => {
 				return (
