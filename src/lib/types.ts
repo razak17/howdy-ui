@@ -31,6 +31,10 @@ export interface IUser {
 	following: string[];
 	profilePicture: string;
 	coverPicture: string;
+	city: string;
+	country: string;
+	relationshipStatus: string;
+	workplace: string;
 	createdAt: Date;
 	updatedAt: Date;
 	__v: number;

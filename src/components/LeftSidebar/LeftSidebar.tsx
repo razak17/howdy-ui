@@ -16,7 +16,7 @@ const LeftSidebar = ({ location }: { location: 'home' | 'profile' }) => {
 		<div className='left-side-bar'>
 			<Searchbar />
 			{user && location === 'home' && <ProfileCard user={user} location='home' />}
-			{location === 'profile' && <UserInfo />}
+			{user && location === 'profile' && <UserInfo user={user} />}
 			<FollowersCard />
 		</div>
 	);

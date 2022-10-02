@@ -3,21 +3,23 @@ import { UilPen } from '@iconscout/react-unicons';
 import ProfileModal from '../ProfileModal/ProfileModal';
 import './UserInfo.css';
 import { useMutation, useQueryClient } from 'react-query';
-import { QueryKeys } from '../../lib/types';
+import { IUser, QueryKeys } from '../../lib/types';
 import { AxiosError } from 'axios';
 import { logout } from '../../lib/api/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const UserInfo = () => {
+const UserInfo = ({ user }: { user: IUser }) => {
 	const [modalOpened, setModalOpened] = useState(false);
-	const user = { _id: '1', name: 'Jane', lastName: '' };
 
+	const params = useParams();
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 
+	const currentUserId = params.id;
+
 	const mutation = useMutation<string, AxiosError, Parameters<typeof logout>>(logout, {
 		onSuccess: () => {
-      navigate('/login', { replace: true });
+			navigate('/login', { replace: true });
 			queryClient.invalidateQueries([QueryKeys.ME]);
 		}
 	});
@@ -30,13 +32,11 @@ const UserInfo = () => {
 		<div className='info-card'>
 			<div className='info-head'>
 				<h4>Profile Info</h4>
-				{user._id === '1' ? (
+				{user._id === currentUserId && (
 					<div>
-						<UilPen width='2rem' height='1.2rem' onClick={() => setModalOpened(true)} />
+						<UilPen onClick={() => setModalOpened(true)} />
 						<ProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} data={user} />
 					</div>
-				) : (
-					''
 				)}
 			</div>
 
@@ -44,19 +44,19 @@ const UserInfo = () => {
 				<span>
 					<b>Relationship status: </b>
 				</span>
-				<span>relationship</span>
+				<span>{user.relationshipStatus ? user.relationshipStatus : 'No Info'}</span>
 			</div>
 			<div className='info'>
 				<span>
 					<b>City: </b>
 				</span>
-				<span>Ottawa</span>
+				<span>{user.city ? user.city : 'No Info'}</span>
 			</div>
 			<div className='info'>
 				<span>
 					<b>Works at: </b>
 				</span>
-				<span>worksAt</span>
+				<span>{user.workplace ? user.workplace : 'No Info'}</span>
 			</div>
 
 			<button className='button logout-button' onClick={handleLogOut}>
