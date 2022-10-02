@@ -1,0 +1,9 @@
+.notfound-container {
+	display: flex;
+  height: 100vh;
+}
+
+.container h2 {
+  margin: auto;
+  font-size: 3rem;
+}

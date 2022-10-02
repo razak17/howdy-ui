@@ -1,9 +1,11 @@
-const NotFOundPage = () => {
+import './404.css';
+
+const NotFoundPage = () => {
 	return (
-		<div>
-			<h1>404 | That Page Does Not Exist</h1>
+		<div className='notfound-container'>
+			<h2>404 | That Page Does Not Exist!</h2>
 		</div>
 	);
 };
 
-export default NotFOundPage;
+export default NotFoundPage;
