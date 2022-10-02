@@ -2,13 +2,28 @@ import { useState } from 'react';
 import { UilPen } from '@iconscout/react-unicons';
 import ProfileModal from '../ProfileModal/ProfileModal';
 import './UserInfo.css';
+import { useMutation, useQueryClient } from 'react-query';
+import { QueryKeys } from '../../lib/types';
+import { AxiosError } from 'axios';
+import { logout } from '../../lib/api/auth';
+import { useNavigate } from 'react-router-dom';
 
 const UserInfo = () => {
 	const [modalOpened, setModalOpened] = useState(false);
 	const user = { _id: '1', name: 'Jane', lastName: '' };
 
+	const navigate = useNavigate();
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation<string, AxiosError, Parameters<typeof logout>>(logout, {
+		onSuccess: () => {
+			queryClient.invalidateQueries([QueryKeys.ME]);
+			navigate('/auth', { replace: true });
+		}
+	});
+
 	const handleLogOut = () => {
-		alert('handleLogOut');
+		mutation.mutate([]);
 	};
 
 	return (
