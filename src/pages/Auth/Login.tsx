@@ -4,8 +4,24 @@ import { LoginFormSchema, LoginFormSchemaType } from '../../utils/formSchema';
 import { Dispatch, SetStateAction } from 'react';
 import { Input } from '../../components/Input/Input';
 import './Auth.css';
+import { QueryKeys } from '../../lib/types';
+import { login } from '../../lib/api/auth';
+import { AxiosError } from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>> }) => {
+	const navigate = useNavigate();
+	const state = useLocation();
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation<string, AxiosError, Parameters<typeof login>['0']>(login, {
+		onSuccess: () => {
+			navigate(state.state || '/', { replace: true });
+			queryClient.invalidateQueries([QueryKeys.ME]);
+		}
+	});
+
 	const {
 		register: loginForm,
 		handleSubmit,
@@ -16,19 +32,14 @@ const Login = ({ setIsSignUp }: { setIsSignUp: Dispatch<SetStateAction<boolean>>
 
 	const onSubmit: SubmitHandler<LoginFormSchemaType> = async (data) => {
 		console.log(data);
+		mutation.mutate(data);
 	};
 
 	return (
 		<form className='info-form auth-form' onSubmit={handleSubmit(onSubmit)}>
 			<h1>Login</h1>
 			<div className='form-item'>
-				<Input
-					required
-					type='text'
-					placeholder='Email'
-					{...loginForm('email')}
-					error={errors.email}
-				/>
+				<Input required type='text' placeholder='Email' {...loginForm('email')} error={errors.email} />
 			</div>
 			<div className='form-item'>
 				<Input
