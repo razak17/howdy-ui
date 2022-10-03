@@ -12,13 +12,6 @@ export interface ILogin {
 	password: string;
 }
 
-export interface IMe {
-	_id: string;
-	username: string;
-	email: string;
-	isAdmin: boolean;
-}
-
 export interface IUser {
 	_id: string;
 	firstName: string;

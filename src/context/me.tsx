@@ -1,11 +1,11 @@
 import { createContext, ReactNode, useContext } from 'react';
 import { RefetchOptions, RefetchQueryFilters, useQuery } from 'react-query';
 import { Loader } from '@mantine/core';
-import { getMe } from '../lib/api/users';
-import { IMe, QueryKeys } from '../lib/types';
+import { getMe, MeResponseType } from '../lib/api/users';
+import { QueryKeys } from '../lib/types';
 
 const MeContext = createContext<{
-	me: IMe | undefined;
+	me: MeResponseType | undefined;
 	refetch?: <TPageData>(
 		/* eslint-disable-next-line no-unused-vars */
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
@@ -18,7 +18,7 @@ const MeContextProvider = ({ children }: { children: ReactNode }) => {
 	const { data, refetch, isLoading } = useQuery([QueryKeys.ME], getMe);
 
 	return (
-		<MeContext.Provider value={{ me: data as IMe, refetch }}>
+		<MeContext.Provider value={{ me: data as MeResponseType, refetch }}>
 			{isLoading ? (
 				<div
 					style={{

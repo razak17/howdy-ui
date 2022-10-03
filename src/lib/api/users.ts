@@ -1,9 +1,19 @@
 import { auth, userBase } from './base';
-import { IMe, IUser } from '../types';
+import { IUser } from '../types';
+import { z } from 'zod';
 
-export const getMe = async (): Promise<IMe> => {
+const MeSchema = z.object({
+	_id: z.string(),
+	username: z.string(),
+	email: z.string(),
+	isAdmin: z.boolean()
+});
+
+export type MeResponseType = z.infer<typeof MeSchema>
+
+export const getMe = async () => {
 	const res = await auth.get(`${userBase}/me`);
-	return res.data;
+  return MeSchema.parse(res.data);
 };
 
 export const getUser = async (userId: string): Promise<IUser> => {
