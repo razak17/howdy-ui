@@ -35,7 +35,7 @@ const UserInfo = ({ user }: { user: IUser }) => {
 				{user._id === currentUserId && (
 					<div>
 						<UilPen onClick={() => setModalOpened(true)} />
-						<ProfileModal modalOpened={modalOpened} setModalOpened={setModalOpened} data={user} />
+						<ProfileModal user={user} modalOpened={modalOpened} setModalOpened={setModalOpened} />
 					</div>
 				)}
 			</div>

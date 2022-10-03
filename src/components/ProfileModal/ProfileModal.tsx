@@ -1,30 +1,46 @@
 import { Modal, useMantineTheme } from '@mantine/core';
+import { AxiosError } from 'axios';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { updateUser } from '../../lib/api/users';
+import { IUser, QueryKeys } from '../../lib/types';
 
 const ProfileModal = ({
 	modalOpened,
-	setModalOpened
+	setModalOpened,
+	user
 }: {
 	modalOpened: boolean;
 	setModalOpened: Dispatch<SetStateAction<boolean>>;
-	data: any;
+	user: IUser;
 }) => {
 	const [profileImage, setProfileImage] = useState<File | null>(null);
 	const [coverImage, setCoverImage] = useState<File | null>(null);
+
+	const {
+		firstName,
+		lastName,
+		workplace,
+		city,
+		country,
+		relationshipStatus
+		// coverPicture,
+		// profilePicture
+	} = user;
+
 	const [formData, setFormData] = useState({
-		firstName: '',
-		lastName: '',
-		username: '',
-		email: '',
-		workplace: '',
-		city: '',
-		country: '',
-		relationshipStatus: '',
-		profilePicture: '',
-		coverPicture: ''
+		firstName,
+		lastName,
+		workplace,
+		city,
+		country,
+		relationshipStatus
+		// profilePicture,
+		// coverPicture
 	});
 
 	const { colorScheme, colors } = useMantineTheme();
+	const queryClient = useQueryClient();
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,24 +53,32 @@ const ProfileModal = ({
 		}
 	};
 
+	const mutation = useMutation<IUser, AxiosError, Parameters<typeof updateUser>['0']>(updateUser, {
+		onSuccess: () => {
+			queryClient.invalidateQueries(QueryKeys.USER);
+			setModalOpened(false);
+		}
+	});
+
 	const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const UserData = formData;
-		if (profileImage) {
-			const data = new FormData();
-			const fileName = Date.now() + profileImage.name;
-			data.append('name', fileName);
-			data.append('file', profileImage);
-			UserData.profilePicture = fileName;
-		}
-		if (coverImage) {
-			const data = new FormData();
-			const fileName = Date.now() + coverImage.name;
-			data.append('name', fileName);
-			data.append('file', coverImage);
-			UserData.coverPicture = fileName;
-		}
-		setModalOpened(false);
+		// const UserData = formData;
+		// if (profileImage) {
+		// 	const data = new FormData();
+		// 	const fileName = Date.now() + profileImage.name;
+		// 	data.append('name', fileName);
+		// 	data.append('file', profileImage);
+		// 	UserData.profilePicture = fileName;
+		// }
+		// if (coverImage) {
+		// 	const data = new FormData();
+		// 	const fileName = Date.now() + coverImage.name;
+		// 	data.append('name', fileName);
+		// 	data.append('file', coverImage);
+		// 	UserData.coverPicture = fileName;
+		// }
+		console.log({ formData });
+		mutation.mutate({ ...formData, _id: user._id });
 	};
 
 	return (

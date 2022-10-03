@@ -9,3 +9,6 @@ Built with React.
 - Axios
 - Zod
 - React Hook Form
+
+## TODO
+- Upload images to firebase (have default cover and profile images)

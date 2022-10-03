@@ -11,3 +11,9 @@ export const getUser = async (userId: string): Promise<IUser> => {
 	const res = await auth.get(`${userBase}/${userId}`);
 	return res.data;
 };
+
+export const updateUser = async (payload: Partial<IUser>): Promise<IUser> => {
+	if (!payload) throw new Error('payload is not defined.');
+	const res = await auth.put(`${userBase}/${payload._id}`, payload);
+	return res.data;
+};
