@@ -55,7 +55,7 @@ const ProfileModal = ({
 
 	const mutation = useMutation<IUser, AxiosError, Parameters<typeof updateUser>['0']>(updateUser, {
 		onSuccess: () => {
-			queryClient.invalidateQueries(QueryKeys.USER);
+			queryClient.invalidateQueries(QueryKeys.USER_PROFILE);
 			setModalOpened(false);
 		}
 	});
