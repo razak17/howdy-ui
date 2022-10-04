@@ -1,66 +1,78 @@
-import { Modal, useMantineTheme } from '@mantine/core';
 import { useState } from 'react';
 
 import profileImg from '../../assets/buddy.png';
+import { useMe } from '../../context/me';
+import { IUser } from '../../lib/types';
+import FollowersModal from '../ChatBox/FollowersModal/FollowersModal';
+import Loader from '../Loader/Loader';
 import './FollowersCard.css';
 
-const FollowersCard = ({ location }: { location?: string }) => {
+const FollowersCard = ({
+	location,
+	users,
+	isLoading
+}: {
+	location?: string;
+	users: IUser[];
+	isLoading: boolean;
+}) => {
 	const [modalOpened, setModalOpened] = useState(false);
 
-	const { colors, colorScheme } = useMantineTheme();
+	const { me } = useMe();
+
+	let filteredUsers = users ? [users[0], users[1]] : null;
+
+	if (location === 'modal') {
+		filteredUsers = users;
+	}
 
 	const handleFollow = () => {
 		alert('follow');
 	};
 
-	const following = false;
-
 	return (
 		<div className='followers-card'>
 			<h3>People you may know</h3>
-			<div className='follower'>
-				<div>
-					<img src={profileImg} alt='profileImage' className='profile-image' />
-					<div className='name'>
-						<span>Jane Doe</span>
-						<span>@jdoe</span>
-					</div>
-				</div>
-				<button
-					className={following ? 'button fc-button unfollow-button' : 'button fc-button'}
-					onClick={handleFollow}
-				>
-					{following ? 'Unfollow' : 'Follow'}
-				</button>
-			</div>
-			<div className='follower'>
-				<div>
-					<img src={profileImg} alt='profileImage' className='profile-image' />
-					<div className='name'>
-						<span>Jane Doe</span>
-						<span>@jdoe</span>
-					</div>
-				</div>
-				<button
-					className={following ? 'button fc-button unfollow-button' : 'button fc-button'}
-					onClick={handleFollow}
-				>
-					{following ? 'Unfollow' : 'Follow'}
-				</button>
-			</div>
+			{isLoading && <Loader />}
+			{filteredUsers?.map((user) => {
+				if (user._id !== me?._id)
+					return (
+						<div key={user._id} className='follower'>
+							<div>
+								<img
+									src={user.profilePicture ? profileImg : profileImg}
+									alt='profileImage'
+									className='profile-image'
+								/>
+								<div className='name'>
+									<span>
+										{user.firstName} {user.lastName}
+									</span>
+									<span>@{user.username}</span>
+								</div>
+							</div>
+							<button
+								className={
+									user?.followers.includes(user._id)
+										? 'button fc-button unfollow-button'
+										: 'button fc-button'
+								}
+								onClick={handleFollow}
+							>
+								{user.followers.includes(user._id) ? 'Unfollow' : 'Follow'}
+							</button>
+						</div>
+					);
+			})}
 
-			{!location ? <span onClick={() => setModalOpened(true)}>Show more</span> : ''}
+			{!location && <span onClick={() => setModalOpened(true)}>Show more</span>}
 
-			<Modal
-				overlayColor={colorScheme === 'dark' ? colors.dark[9] : colors.gray[2]}
-				overlayOpacity={0.55}
-				overlayBlur={3}
-				size='55%'
-				opened={modalOpened}
-				onClose={() => setModalOpened(false)}
-			>
-				<FollowersCard location='modal' />
-			</Modal>
+			<FollowersModal
+				isLoading={isLoading}
+				users={users as IUser[]}
+				modalOpened={modalOpened}
+				setModalOpened={setModalOpened}
+			/>
 		</div>
 	);
 };

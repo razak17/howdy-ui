@@ -48,5 +48,6 @@ export interface IPost extends MongoDocument {
 export enum QueryKeys {
 	ME = 'Me',
 	USER = 'User',
+	USERS = 'Users',
 	POSTS = 'Posts'
 }
