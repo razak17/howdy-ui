@@ -32,3 +32,15 @@ export const updateUser = async (payload: Partial<IUser>): Promise<IUser> => {
 	const res = await auth.put(`${userBase}/${payload._id}`, payload);
 	return res.data;
 };
+
+export const followUser = async (userId: string) => {
+	if (!userId) throw new Error('userId is not defined.');
+	const res = await auth.put(`${userBase}/${userId}/follow`);
+	return res.data;
+};
+
+export const unfollowUser = async (userId: string) => {
+	if (!userId) throw new Error('userId is not defined.');
+	const res = await auth.put(`${userBase}/${userId}/unfollow`);
+	return res.data;
+};

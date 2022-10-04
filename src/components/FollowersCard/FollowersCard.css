@@ -17,7 +17,7 @@
 
 .follower > div {
 	display: flex;
-	gap: 10px;
+	gap: 8px;
 }
 
 .name {
@@ -33,7 +33,7 @@
 
 .fc-button {
 	height: 2rem;
-	padding: 0 20px;
+	padding: 0 16px;
 }
 
 .unfollow-button {

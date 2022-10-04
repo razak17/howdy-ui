@@ -1,8 +1,11 @@
+import { AxiosError } from 'axios';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 
 import profileImg from '../../assets/buddy.png';
 import { useMe } from '../../context/me';
-import { IUser } from '../../lib/types';
+import { followUser, unfollowUser } from '../../lib/api/users';
+import { IUser, QueryKeys } from '../../lib/types';
 import FollowersModal from '../ChatBox/FollowersModal/FollowersModal';
 import Loader from '../Loader/Loader';
 import './FollowersCard.css';
@@ -26,8 +29,32 @@ const FollowersCard = ({
 		filteredUsers = users;
 	}
 
-	const handleFollow = () => {
-		alert('follow');
+	const queryClient = useQueryClient();
+
+	const followMutation = useMutation<string, AxiosError, Parameters<typeof followUser>['0']>(
+		followUser,
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries([QueryKeys.USERS]);
+				queryClient.invalidateQueries([QueryKeys.USER]);
+			}
+		}
+	);
+
+	const unfollowMutation = useMutation<string, AxiosError, Parameters<typeof unfollowUser>['0']>(
+		unfollowUser,
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries([QueryKeys.USERS]);
+				queryClient.invalidateQueries([QueryKeys.USER]);
+			}
+		}
+	);
+
+	const handleFollow = (user: IUser) => {
+		user.followers.includes(me?._id as string)
+			? unfollowMutation.mutate(user._id)
+			: followMutation.mutate(user._id);
 	};
 
 	return (
@@ -53,13 +80,13 @@ const FollowersCard = ({
 							</div>
 							<button
 								className={
-									user?.followers.includes(user._id)
+									user?.followers.includes(me?._id as string)
 										? 'button fc-button unfollow-button'
 										: 'button fc-button'
 								}
-								onClick={handleFollow}
+								onClick={() => handleFollow(user)}
 							>
-								{user.followers.includes(user._id) ? 'Unfollow' : 'Follow'}
+								{user.followers.includes(me?._id as string) ? 'Unfollow' : 'Follow'}
 							</button>
 						</div>
 					);
