@@ -12,10 +12,13 @@ import profileImg from '../../assets/buddy.png';
 import { IPost, QueryKeys } from '../../lib/types';
 import { getUser } from '../../lib/api/users';
 import { likePost } from '../../lib/api/post';
+import { useMe } from '../../context/me';
 import './Post.css';
 
 const Post = ({ post }: { post: IPost }) => {
 	const queryClient = useQueryClient();
+
+	const { me } = useMe();
 
 	const { data: user } = useQuery([QueryKeys.USER, post._id], () => getUser(`${post.userId}`));
 
@@ -53,7 +56,7 @@ const Post = ({ post }: { post: IPost }) => {
 			{post.image && <img src={postPic} alt='' />}
 			<div className='post-reactions'>
 				<img
-					src={post.likes.includes(user?._id as string) ? Heart : NotLike}
+					src={post.likes.includes(me?._id as string) ? Heart : NotLike}
 					alt=''
 					onClick={handleLike}
 				/>
@@ -61,7 +64,10 @@ const Post = ({ post }: { post: IPost }) => {
 				<img src={Share} alt='share' />
 			</div>
 
-			<span className='likes'>{post.likes.length} likes</span>
+			<span className='likes'>
+				{post.likes.length}
+				{post.likes.length && post.likes.length === 1 ? ' like' : ' likes'}
+			</span>
 		</div>
 	);
 };
