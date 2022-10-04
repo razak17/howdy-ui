@@ -11,3 +11,9 @@ export const getRandomPosts = async (): Promise<IPost[]> => {
 	const res = await auth.get(`${postBase}/explore/random`);
 	return res.data;
 };
+
+export const likePost = async (postId: string) => {
+	if (!postId) throw Error('postId is not defined.');
+	const res = await auth.put(`${postBase}/${postId}/like`);
+	return res.data;
+};

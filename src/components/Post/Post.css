@@ -20,9 +20,13 @@
 	gap: 1.5rem;
 }
 
+.post-reactions img {
+	cursor: pointer;
+}
+
 .likes {
 	color: var(--gray);
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .detail {
@@ -31,16 +35,16 @@
 }
 
 .detail > div {
-  display: flex;
+	display: flex;
 	flex-direction: row;
 	width: 100%;
 	gap: 1rem;
 }
 
 .detail > div > span {
-  font-size: 14px;
-  margin-left: auto;
-  color: var(--gray);
+	font-size: 14px;
+	margin-left: auto;
+	color: var(--gray);
 }
 
 .post-profile-img {
@@ -51,15 +55,14 @@
 }
 
 .profile-user {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .profile-user > p {
-  color: var(--gray);
+	color: var(--gray);
 }
 
 .post-desc {
-  margin-top: 1rem;
-
+	margin-top: 1rem;
 }

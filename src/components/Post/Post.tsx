@@ -1,5 +1,6 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
+import { AxiosError } from 'axios';
 import { format } from 'timeago.js';
 
 import postPic from '../../assets/postpic1.jpg';
@@ -10,14 +11,23 @@ import NotLike from '../../assets/notlike.png';
 import profileImg from '../../assets/buddy.png';
 import { IPost, QueryKeys } from '../../lib/types';
 import { getUser } from '../../lib/api/users';
+import { likePost } from '../../lib/api/post';
 import './Post.css';
-import { useState } from 'react';
 
 const Post = ({ post }: { post: IPost }) => {
+	const queryClient = useQueryClient();
+
 	const { data: user } = useQuery([QueryKeys.USER, post._id], () => getUser(`${post.userId}`));
 
-	const [liked, setLiked] = useState(post.likes.includes(user?._id as string));
-	const [likes, setLikes] = useState(post.likes.length);
+	const mutation = useMutation<string, AxiosError, Parameters<typeof likePost>['0']>(likePost, {
+		onSuccess: () => {
+			queryClient.invalidateQueries([QueryKeys.POSTS]);
+		}
+	});
+
+	const handleLike = () => {
+		mutation.mutate(post._id);
+	};
 
 	return (
 		<div className='post'>
@@ -42,12 +52,16 @@ const Post = ({ post }: { post: IPost }) => {
 			</div>
 			{post.image && <img src={postPic} alt='' />}
 			<div className='post-reactions'>
-				<img src={liked ? Heart : NotLike} alt='' style={{ cursor: 'pointer' }} />
+				<img
+					src={post.likes.includes(user?._id as string) ? Heart : NotLike}
+					alt=''
+					onClick={handleLike}
+				/>
 				<img src={Comment} alt='comment' />
 				<img src={Share} alt='share' />
 			</div>
 
-			<span className='likes'>{3} likes</span>
+			<span className='likes'>{post.likes.length} likes</span>
 		</div>
 	);
 };
