@@ -31,10 +31,10 @@
 }
 
 .profile-img {
-	width: 6rem;
+	width: 4rem;
 	border-radius: 50%;
 	position: absolute;
-	bottom: -3rem;
+	bottom: -2rem;
 	box-shadow: var(--profile-shadow);
 }
 

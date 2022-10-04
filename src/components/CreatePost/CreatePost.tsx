@@ -5,7 +5,7 @@ import { UilLocationPoint } from '@iconscout/react-unicons';
 import { UilSchedule } from '@iconscout/react-unicons';
 import { UilTimes } from '@iconscout/react-unicons';
 
-import profileImg from '../../assets/profile.jpg';
+import profileImg from '../../assets/buddy.png';
 import './CreatePost.css';
 
 const CreatePost = () => {

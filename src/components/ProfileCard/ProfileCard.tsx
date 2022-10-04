@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import coverImg from '../../assets/cover.jpg';
-import profileImg from '../../assets/profile.jpg';
+import profileImg from '../../assets/buddy.png';
 import { IUser } from '../../lib/types';
 import './ProfileCard.css';
 

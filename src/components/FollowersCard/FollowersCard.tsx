@@ -1,7 +1,7 @@
 import { Modal, useMantineTheme } from '@mantine/core';
 import { useState } from 'react';
 
-import profileImg from '../../assets/profile.jpg';
+import profileImg from '../../assets/buddy.png';
 import './FollowersCard.css';
 
 const FollowersCard = ({ location }: { location?: string }) => {
