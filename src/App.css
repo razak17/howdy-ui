@@ -96,6 +96,7 @@ a {
 	grid-template-columns: 20rem auto 20rem;
 	gap: 1rem;
 }
+
 .notfound-container {
 	display: flex;
 	height: 100vh;
@@ -107,12 +108,13 @@ a {
 }
 
 /* Components */
-.left-side-bar {
+.left-sidebar {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 	align-items: center;
 	overflow: auto;
+  height: 100vh;
 	padding-right: 10px;
 }
 
@@ -143,7 +145,6 @@ a {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	padding-top: 1rem;
 }
 
 /* Form */

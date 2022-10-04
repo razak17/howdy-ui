@@ -2,6 +2,9 @@
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: 2rem;
 }
 
 .nav-icons {
@@ -25,7 +28,7 @@
 }
 
 .right-button {
-	height: 3rem;
-	width: 80%;
+	width: 100%;
+  padding: 16px;
 	align-self: center;
 }

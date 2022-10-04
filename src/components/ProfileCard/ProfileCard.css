@@ -30,6 +30,10 @@
 	width: 100%;
 }
 
+.cover-img-profile {
+  height: 10rem;
+}
+
 .profile-img {
 	width: 4rem;
 	border-radius: 50%;

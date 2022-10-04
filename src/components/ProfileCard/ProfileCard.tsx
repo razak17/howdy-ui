@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 import coverImg from '../../assets/cover.jpg';
 import profileImg from '../../assets/buddy.png';
 import { IUser } from '../../lib/types';
@@ -9,13 +10,13 @@ const ProfileCard = ({ location, user }: { location: 'home' | 'profile'; user: I
 		<div className='profile-card'>
 			<div className='profile-imgs'>
 				<img
-					className='cover-img'
-					src={user?.coverPicture ? user.coverPicture : coverImg}
+          className={location === 'profile' ? 'cover-img cover-img-profile' : 'cover-img'}
+					src={user?.coverPicture ? coverImg : coverImg}
 					alt='coverImage'
 				/>
 				<img
 					className='profile-img'
-					src={user?.profilePicture ? user.profilePicture : profileImg}
+					src={user?.profilePicture ? profileImg : profileImg}
 					alt='profileImage'
 				/>
 			</div>

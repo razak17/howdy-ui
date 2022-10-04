@@ -15,7 +15,7 @@ const LeftSidebar = ({ location }: { location: 'home' | 'profile' }) => {
 	const { data: users, isLoading } = useQuery([QueryKeys.USERS], () => getUsers());
 
 	return (
-		<div className='left-side-bar'>
+		<div className='left-sidebar'>
 			<Searchbar />
 			{user && location === 'home' && <ProfileCard user={user} location='home' />}
 			{user && location === 'profile' && <UserInfo user={user} />}
