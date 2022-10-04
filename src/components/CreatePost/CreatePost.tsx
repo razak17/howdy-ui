@@ -7,9 +7,10 @@ import { UilTimes } from '@iconscout/react-unicons';
 
 import profileImg from '../../assets/buddy.png';
 import './CreatePost.css';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { AxiosError } from 'axios';
-import { createPost, CreatePostResponseType } from '../../lib/api/post';
+import { createPost } from '../../lib/api/post';
+import { IPost, QueryKeys } from '../../lib/types';
 
 const CreatePost = () => {
 	const [image, setImage] = useState<File | null>(null);
@@ -17,13 +18,13 @@ const CreatePost = () => {
 	const desc = useRef<HTMLTextAreaElement>(null);
 	const imageRef = useRef<HTMLDivElement>(null);
 
-	const loading = false;
+	const queryClient = useQueryClient();
 
-	const mutation = useMutation<
-		CreatePostResponseType,
-		AxiosError,
-		Parameters<typeof createPost>['0']
-	>(createPost);
+	const mutation = useMutation<IPost, AxiosError, Parameters<typeof createPost>['0']>(createPost, {
+		onSuccess: () => {
+			queryClient.invalidateQueries([QueryKeys.POSTS]);
+		}
+	});
 
 	// handle Image Change
 	const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,8 +64,8 @@ const CreatePost = () => {
 						<UilSchedule />
 						Shedule
 					</div>
-					<button className='button ps-button' onClick={handleUpload} disabled={loading}>
-						{loading ? 'uploading' : 'Post'}
+					<button className='button ps-button' onClick={handleUpload} disabled={mutation.isLoading}>
+						{mutation.isLoading ? 'uploading' : 'Post'}
 					</button>
 					<div ref={imageRef} style={{ display: 'none' }}>
 						<input type='file' onChange={(e) => onImageChange(e)} />
