@@ -1,15 +1,13 @@
-import { z } from 'zod';
+import { IPost } from '../types';
 import { auth, postBase } from './base';
 
-const CreatePostSchema = z.object({
-	description: z.string(),
-	image: z.string().optional()
-});
-
-export type CreatePostResponseType = z.infer<typeof CreatePostSchema>;
-
-export const createPost = async (description: string): Promise<CreatePostResponseType> => {
+export const createPost = async (description: string): Promise<IPost> => {
 	if (!description) throw Error('description is not defined.');
 	const res = await auth.post(`${postBase}`, { description });
+	return res.data;
+};
+
+export const getRandomPosts = async (): Promise<IPost[]> => {
+	const res = await auth.get(`${postBase}/explore/random`);
 	return res.data;
 };

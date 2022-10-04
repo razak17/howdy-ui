@@ -1,4 +1,6 @@
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import { format } from 'timeago.js';
 
 import postPic from '../../assets/postpic1.jpg';
 import Comment from '../../assets/comment.png';
@@ -6,10 +8,16 @@ import Share from '../../assets/share.png';
 import Heart from '../../assets/like.png';
 import NotLike from '../../assets/notlike.png';
 import profileImg from '../../assets/buddy.png';
+import { IPost, QueryKeys } from '../../lib/types';
+import { getUser } from '../../lib/api/users';
 import './Post.css';
+import { useState } from 'react';
 
-const Post = ({ data }: { data: any }) => {
-	const liked = true;
+const Post = ({ post }: { post: IPost }) => {
+	const { data: user } = useQuery([QueryKeys.USER, post._id], () => getUser(`${post.userId}`));
+
+	const [liked, setLiked] = useState(post.likes.includes(user?._id as string));
+	const [likes, setLikes] = useState(post.likes.length);
 
 	return (
 		<div className='post'>
@@ -17,20 +25,22 @@ const Post = ({ data }: { data: any }) => {
 				<div>
 					<img
 						className='post-profile-img'
-						src={data?.profilePicture ? data.profilePicture : profileImg}
-						alt='profileImage'
+						src={user?.profilePicture ? user.profilePicture : profileImg}
+						alt=''
 					/>
 					<div className='profile-user'>
-						<p>Jane Doe</p>
-						<Link to='/profile/1' className='profile-link'>
-							<p>@jdoe</p>
+						<p>
+							{user?.firstName} {user?.lastName}
+						</p>
+						<Link to={`/profile/${user?._id}`} className='profile-link'>
+							<p>@{user?.username}</p>
 						</Link>
 					</div>
-					<span>14 minutes ago</span>
+					<span>{format(post.createdAt)}</span>
 				</div>
-				<span className='post-desc'>jane created this awesome post</span>
+				<span className='post-desc'>{post.description}</span>
 			</div>
-			<img src={postPic} alt='' />
+			{post.image && <img src={postPic} alt='' />}
 			<div className='post-reactions'>
 				<img src={liked ? Heart : NotLike} alt='' style={{ cursor: 'pointer' }} />
 				<img src={Comment} alt='comment' />

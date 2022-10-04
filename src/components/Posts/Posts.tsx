@@ -1,14 +1,13 @@
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import { getRandomPosts } from '../../lib/api/post';
+import { QueryKeys } from '../../lib/types';
 import Post from '../Post/Post';
 
 const Posts = () => {
 	const params = useParams();
 
-	const posts = [
-		{ userId: '1', description: 'Hello World' },
-		{ userId: '2', description: 'Hello Mom' },
-		{ userId: '3', description: 'Hey Girl' }
-	];
+	const { data: posts } = useQuery([QueryKeys.POSTS], () => getRandomPosts());
 
 	const loading = false;
 
@@ -21,7 +20,7 @@ const Posts = () => {
 			{loading
 				? 'Fetching posts....'
 				: filteredPosts.map((post, id) => {
-						return <Post data={post} key={id} />;
+						return <Post post={post} key={id} />;
 				  })}
 		</div>
 	);

@@ -12,8 +12,14 @@ export interface ILogin {
 	password: string;
 }
 
-export interface IUser {
+interface MongoDocument {
 	_id: string;
+	createdAt: Date;
+	updatedAt: Date;
+	__v: number;
+}
+
+export interface IUser extends MongoDocument {
 	firstName: string;
 	lastName: string;
 	username: string;
@@ -28,13 +34,19 @@ export interface IUser {
 	country: string;
 	relationshipStatus: string;
 	workplace: string;
-	createdAt: Date;
-	updatedAt: Date;
-	__v: number;
+}
+
+export interface IPost extends MongoDocument {
+	userId: string;
+	description: string;
+	image: string;
+	likes: string[];
+	dislikes: string[];
 }
 
 /* eslint-disable no-unused-vars */
 export enum QueryKeys {
 	ME = 'Me',
-	USER = 'User'
+	USER = 'User',
+	POSTS = 'Posts'
 }
