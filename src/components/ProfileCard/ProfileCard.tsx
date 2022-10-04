@@ -12,7 +12,7 @@ const ProfileCard = ({
 }: {
 	location: 'home' | 'profile';
 	user: IUser;
-	postsLen: number;
+	postsLen?: number;
 }) => {
 	return (
 		<div className='profile-card'>
