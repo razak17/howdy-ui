@@ -6,7 +6,7 @@ const Home = () => {
 	return (
 		<div className='home-container'>
 			<LeftSidebar location='home' />
-			<MainContent />
+			<MainContent location='home' />
 			<RightSidebar />
 		</div>
 	);

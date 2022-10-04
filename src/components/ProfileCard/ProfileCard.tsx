@@ -5,12 +5,20 @@ import profileImg from '../../assets/buddy.png';
 import { IUser } from '../../lib/types';
 import './ProfileCard.css';
 
-const ProfileCard = ({ location, user }: { location: 'home' | 'profile'; user: IUser }) => {
+const ProfileCard = ({
+	location,
+	user,
+	postsLen
+}: {
+	location: 'home' | 'profile';
+	user: IUser;
+	postsLen: number;
+}) => {
 	return (
 		<div className='profile-card'>
 			<div className='profile-imgs'>
 				<img
-          className={location === 'profile' ? 'cover-img cover-img-profile' : 'cover-img'}
+					className={location === 'profile' ? 'cover-img cover-img-profile' : 'cover-img'}
 					src={user?.coverPicture ? coverImg : coverImg}
 					alt='coverImage'
 				/>
@@ -41,7 +49,7 @@ const ProfileCard = ({ location, user }: { location: 'home' | 'profile'; user: I
 						<>
 							<div className='vl'></div>
 							<div className='follow'>
-								<span>7</span>
+								<span>{postsLen}</span>
 								<span>Posts</span>
 							</div>
 						</>
