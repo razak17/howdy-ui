@@ -20,7 +20,7 @@
 	overflow: hidden;
 	color: var(--black);
 	background: var(--bg);
-	padding: 1rem;
+	padding: 0 1rem;
 }
 
 .flex-center {
@@ -119,6 +119,7 @@
 	overflow: auto;
 	padding-right: 10px;
 	height: 100vh;
+	padding-top: 1rem;
 }
 
 .posts {
