@@ -5,7 +5,6 @@ import PrivateRoute from './components/AuthRoute/PrivateRoute';
 import AuthRoute from './components/AuthRoute/AuthRoute';
 import { MeContextProvider } from './context/me';
 import NotFoundPage from './pages/404/404';
-import Auth from './pages/Auth/Auth';
 import Chat from './pages/Chat/Chat';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';

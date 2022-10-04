@@ -9,7 +9,7 @@
 .create-post > div {
 	display: flex;
 	flex-direction: column;
-	width: 90%;
+	width: 100%;
 	gap: 1rem;
 }
 
@@ -17,6 +17,7 @@
 	background-color: var(--input-color);
 	border-radius: 10px;
 	height: 100px;
+  width: 100%;
 	padding: 18px;
 	font-size: 14px;
 	border: none;
