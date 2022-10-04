@@ -7,6 +7,9 @@ import { UilTimes } from '@iconscout/react-unicons';
 
 import profileImg from '../../assets/buddy.png';
 import './CreatePost.css';
+import { useMutation } from 'react-query';
+import { AxiosError } from 'axios';
+import { createPost, CreatePostResponseType } from '../../lib/api/post';
 
 const CreatePost = () => {
 	const [image, setImage] = useState<File | null>(null);
@@ -16,6 +19,12 @@ const CreatePost = () => {
 
 	const loading = false;
 
+	const mutation = useMutation<
+		CreatePostResponseType,
+		AxiosError,
+		Parameters<typeof createPost>['0']
+	>(createPost);
+
 	// handle Image Change
 	const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files[0]) {
@@ -24,8 +33,12 @@ const CreatePost = () => {
 		}
 	};
 
-	const handleUpload = () => {
-		alert('handle upload');
+	const handleUpload = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		const text = desc?.current?.value;
+		if (text) {
+			mutation.mutate(text.trim());
+		}
 	};
 
 	return (
@@ -51,7 +64,7 @@ const CreatePost = () => {
 						Shedule
 					</div>
 					<button className='button ps-button' onClick={handleUpload} disabled={loading}>
-						{loading ? 'uploading' : 'Share'}
+						{loading ? 'uploading' : 'Post'}
 					</button>
 					<div ref={imageRef} style={{ display: 'none' }}>
 						<input type='file' onChange={(e) => onImageChange(e)} />
