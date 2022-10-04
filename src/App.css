@@ -16,6 +16,10 @@
 	--blur: #a6ddf0;
 }
 
+a {
+	text-decoration: none;
+}
+
 .container {
 	overflow: hidden;
 	color: var(--black);

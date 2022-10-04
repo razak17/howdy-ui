@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
+import { Link } from 'react-router-dom';
 
 import profileImg from '../../assets/buddy.png';
 import { useMe } from '../../context/me';
@@ -75,7 +76,9 @@ const FollowersCard = ({
 									<span>
 										{user.firstName} {user.lastName}
 									</span>
-									<span>@{user.username}</span>
+                <Link to={`/profile/${user._id}`}>
+                  <span>@{user.username}</span>
+                </Link>
 								</div>
 							</div>
 							<button
