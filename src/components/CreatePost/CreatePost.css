@@ -3,7 +3,7 @@
 	gap: 1rem;
 	background-color: var(--card-color);
 	padding: 1rem;
-	border-radius: 1rem;
+	border-radius: 2rem;
 }
 
 .create-post > div {
@@ -15,10 +15,10 @@
 
 .create-post > div > textarea {
 	background-color: var(--input-color);
-	border-radius: 10px;
+	border-radius: 2rem;
 	height: 100px;
   width: 100%;
-	padding: 18px;
+	padding: 1rem 1.5rem;
 	font-size: 14px;
 	border: none;
 	outline: none;

@@ -24,7 +24,7 @@ const RegisterForm = () => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof register>['0']>(register, {
 		onSuccess: () => {
-      navigate('/login', { replace: true });
+			navigate('/login', { replace: true });
 			queryClient.invalidateQueries([QueryKeys.ME]);
 		}
 	});

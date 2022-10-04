@@ -10,4 +10,4 @@
   yarn add react-query @hookform/resolvers zod react-hook-form
 
 - Redux stuff
-react-redux redux redux-devtools-extension redux-logger redux-persist redux-thunk
+  react-redux redux redux-devtools-extension redux-logger redux-persist redux-thunk

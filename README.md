@@ -3,6 +3,7 @@
 Built with React.
 
 ## Technologies used
+
 - React
 - Mantine
 - React Query
@@ -11,4 +12,6 @@ Built with React.
 - React Hook Form
 
 ## TODO
+
 - Upload images to firebase (have default cover and profile images)
+- time ago for post

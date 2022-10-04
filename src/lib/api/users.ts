@@ -9,11 +9,11 @@ const MeSchema = z.object({
 	isAdmin: z.boolean()
 });
 
-export type MeResponseType = z.infer<typeof MeSchema>
+export type MeResponseType = z.infer<typeof MeSchema>;
 
 export const getMe = async () => {
 	const res = await auth.get(`${userBase}/me`);
-  return MeSchema.parse(res.data);
+	return MeSchema.parse(res.data);
 };
 
 export const getUser = async (userId: string): Promise<IUser> => {

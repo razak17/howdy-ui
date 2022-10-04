@@ -4,13 +4,7 @@ import profileImg from '../../assets/buddy.png';
 import { IUser } from '../../lib/types';
 import './ProfileCard.css';
 
-const ProfileCard = ({
-	location,
-	user
-}: {
-	location: 'home' | 'profile';
-    user: IUser;
-}) => {
+const ProfileCard = ({ location, user }: { location: 'home' | 'profile'; user: IUser }) => {
 	return (
 		<div className='profile-card'>
 			<div className='profile-imgs'>
