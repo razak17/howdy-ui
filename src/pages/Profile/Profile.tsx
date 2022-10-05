@@ -19,7 +19,7 @@ const Profile = () => {
 		<div className='profile'>
 			<LeftSidebar location='profile' />
 			<div className='profile-center'>
-				<MainContent posts={posts as IPost[]} postsIsLoading={isLoading} />
+				<MainContent location='profile' posts={posts as IPost[]} postsIsLoading={isLoading} />
 			</div>
 			<RightSidebar />
 		</div>

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { format } from 'timeago.js';
 
@@ -17,6 +17,9 @@ import './Post.css';
 
 const Post = ({ post }: { post: IPost }) => {
 	const queryClient = useQueryClient();
+	const params = useLocation();
+
+	console.log({ params });
 
 	const { me } = useMe();
 
@@ -24,7 +27,13 @@ const Post = ({ post }: { post: IPost }) => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof likePost>['0']>(likePost, {
 		onSuccess: () => {
-			queryClient.invalidateQueries([QueryKeys.POSTS]);
+			if (params.pathname === '/') {
+				queryClient.invalidateQueries([QueryKeys.POSTS]);
+			} else if (params.pathname === '/search') {
+				queryClient.invalidateQueries([QueryKeys.SEARCH]);
+			} else {
+				queryClient.invalidateQueries([QueryKeys.USER_POSTS]);
+			}
 		}
 	});
 

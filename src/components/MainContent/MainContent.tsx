@@ -10,7 +10,7 @@ import CreatePost from '../CreatePost/CreatePost';
 import Posts from '../Posts/Posts';
 
 interface IProps {
-	location?: TLocation;
+	location: TLocation;
 	posts: IPost[];
 	postsIsLoading: boolean;
 }
@@ -29,14 +29,11 @@ const MainContent = ({ location, posts, postsIsLoading }: IProps) => {
 	if (isLoading) <Loader />;
 	return (
 		<div className='main-content'>
-			{user && location !== 'search' && (
+			{user && location === 'profile' && (
 				<ProfileCard postsLen={posts?.length as number} user={user} location='profile' />
 			)}
 			{location === 'home' && <CreatePost />}
-			<Posts
-				posts={posts as IPost[]}
-				isLoading={postsIsLoading}
-			/>
+			<Posts posts={posts as IPost[]} isLoading={postsIsLoading} />
 		</div>
 	);
 };
