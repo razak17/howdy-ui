@@ -5,6 +5,7 @@
   height: 100vh;
   overflow: auto;
   padding-bottom: 2rem;
+	padding-right: 10px;
 }
 
 .nav-icons {
