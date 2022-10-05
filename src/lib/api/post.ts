@@ -12,8 +12,20 @@ export const getRandomPosts = async (): Promise<IPost[]> => {
 	return res.data;
 };
 
+export const getUserPosts = async (userId: string): Promise<IPost[]> => {
+	if (!userId) throw Error('userId is not defined.');
+	const res = await auth.get(`${postBase}/user/${userId}`);
+	return res.data;
+};
+
 export const likePost = async (postId: string) => {
 	if (!postId) throw Error('postId is not defined.');
 	const res = await auth.put(`${postBase}/${postId}/like`);
+	return res.data;
+};
+
+export const searchPosts = async (query: string): Promise<IPost[]> => {
+	if (!query) throw new Error('query is not defined.');
+	const res = await auth.get(`${postBase}/search${query}`);
 	return res.data;
 };

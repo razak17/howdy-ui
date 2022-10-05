@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import profileImg from '../../assets/buddy.png';
 import { useMe } from '../../context/me';
 import { followUser, unfollowUser } from '../../lib/api/users';
-import { IUser, QueryKeys } from '../../lib/types';
+import { IUser, QueryKeys, TLocation } from '../../lib/types';
 import FollowersModal from '../ChatBox/FollowersModal/FollowersModal';
 import Loader from '../Loader/Loader';
 import './FollowersCard.css';
@@ -16,7 +16,7 @@ const FollowersCard = ({
 	users,
 	isLoading
 }: {
-	location?: string;
+	location?: TLocation;
 	users: IUser[];
 	isLoading: boolean;
 }) => {

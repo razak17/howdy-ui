@@ -1,17 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 
+import { MeContextProvider } from './context/me';
 import PrivateRoute from './components/AuthRoute/PrivateRoute';
 import AuthRoute from './components/AuthRoute/AuthRoute';
-import { MeContextProvider } from './context/me';
 import NotFoundPage from './pages/404/404';
 import Chat from './pages/Chat/Chat';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
-
-import './App.css';
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
+import Search from './pages/Search/Search';
+import './App.css';
 
 const App = () => {
 	return (
@@ -54,6 +54,14 @@ const App = () => {
 							element={
 								<PrivateRoute>
 									<Chat />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/search'
+							element={
+								<PrivateRoute>
+									<Search />
 								</PrivateRoute>
 							}
 						/>

@@ -4,10 +4,10 @@ import Searchbar from '../Searchbar/Searchbar';
 import UserInfo from '../UserInfo/UserInfo';
 import { useMe } from '../../context/me';
 import { useQuery } from 'react-query';
-import { IUser, QueryKeys } from '../../lib/types';
+import { IUser, QueryKeys, TLocation } from '../../lib/types';
 import { getUser, getUsers } from '../../lib/api/users';
 
-const LeftSidebar = ({ location }: { location: 'home' | 'profile' }) => {
+const LeftSidebar = ({ location }: { location: TLocation }) => {
 	const { me } = useMe();
 
 	const { data: user } = useQuery([QueryKeys.USER], () => getUser(`${me?._id}`));
@@ -17,9 +17,11 @@ const LeftSidebar = ({ location }: { location: 'home' | 'profile' }) => {
 	return (
 		<div className='left-sidebar'>
 			<Searchbar />
-			{user && location === 'home' && <ProfileCard user={user} location='home' />}
+			{user && location !== 'profile' && <ProfileCard user={user} location='home' />}
 			{user && location === 'profile' && <UserInfo />}
-			<FollowersCard users={users as IUser[]} isLoading={isLoading} />
+			{users && location !== 'search' && (
+				<FollowersCard users={users as IUser[]} isLoading={isLoading} />
+			)}
 		</div>
 	);
 };

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import coverImg from '../../assets/cover.jpg';
 import profileImg from '../../assets/buddy.png';
-import { IUser } from '../../lib/types';
+import { IUser, TLocation } from '../../lib/types';
 import './ProfileCard.css';
 
 const ProfileCard = ({
@@ -10,7 +10,7 @@ const ProfileCard = ({
 	user,
 	postsLen
 }: {
-	location: 'home' | 'profile';
+	location: TLocation;
 	user: IUser;
 	postsLen?: number;
 }) => {

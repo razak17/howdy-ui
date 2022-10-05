@@ -47,8 +47,13 @@ export interface IPost extends MongoDocument {
 /* eslint-disable no-unused-vars */
 export enum QueryKeys {
 	ME = 'Me',
+	CURRENT_USER = 'CurrentUser',
 	USER = 'User',
 	USERS = 'Users',
 	POSTS = 'Posts',
-	USER_PROFILE = 'UserProfile'
+	USER_PROFILE = 'UserProfile',
+	USER_POSTS = 'UserPosts',
+	SEARCH = 'Search'
 }
+
+export type TLocation = 'home' | 'profile' | 'search' | 'modal';
