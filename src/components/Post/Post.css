@@ -47,13 +47,6 @@
 	color: var(--gray);
 }
 
-.post-profile-img {
-	border-radius: 50%;
-	width: 3rem;
-	height: 3rem;
-	box-shadow: var(--profile-shadow);
-}
-
 .profile-user {
 	display: flex;
 	flex-direction: column;

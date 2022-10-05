@@ -46,7 +46,7 @@ const Post = ({ post }: { post: IPost }) => {
 			<div className='detail'>
 				<div>
 					<img
-						className='post-profile-img'
+						className='profile-image'
 						src={user?.profilePicture ? user.profilePicture : profileImg}
 						alt=''
 					/>

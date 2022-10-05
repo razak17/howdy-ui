@@ -16,7 +16,12 @@ const Search = () => {
 	return (
 		<div className='home-container'>
 			<LeftSidebar location='search' />
-			<MainContent posts={posts as IPost[]} postsIsLoading={isLoading} location='search' />
+			<MainContent
+				posts={posts as IPost[]}
+				postsIsLoading={isLoading}
+				location='search'
+				query={query}
+			/>
 			<RightSidebar />
 		</div>
 	);
