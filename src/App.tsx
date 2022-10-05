@@ -73,14 +73,7 @@ const App = () => {
 								</AuthRoute>
 							}
 						/>
-						<Route
-							path='/login'
-							element={
-								<AuthRoute>
-									<Login />
-								</AuthRoute>
-							}
-						/>
+						<Route path='/login' element={<Login />} />
 						<Route path='*' element={<NotFoundPage />} />
 					</Routes>
 				</div>

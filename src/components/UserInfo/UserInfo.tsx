@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { UilPen } from '@iconscout/react-unicons';
 import ProfileModal from '../ProfileModal/ProfileModal';
 import './UserInfo.css';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { IUser, QueryKeys } from '../../lib/types';
 import { AxiosError } from 'axios';
 import { logout } from '../../lib/api/auth';
@@ -15,8 +15,7 @@ const UserInfo = () => {
 
 	const params = useParams();
 	const navigate = useNavigate();
-	const queryClient = useQueryClient();
-	const { me } = useMe();
+	const { me, refetch } = useMe();
 
 	const currentUserId = params.id;
 
@@ -26,7 +25,7 @@ const UserInfo = () => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof logout>>(logout, {
 		onSuccess: () => {
-			queryClient.invalidateQueries([QueryKeys.ME]);
+      refetch();
 			navigate('/login', { replace: true });
 		}
 	});

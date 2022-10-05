@@ -6,12 +6,13 @@ import { QueryKeys } from '../lib/types';
 
 const MeContext = createContext<{
 	me: MeResponseType | undefined;
-	refetch?: <TPageData>(
+	refetch: <TPageData>(
 		/* eslint-disable-next-line no-unused-vars */
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
 		/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 	) => any;
 	remove?: () => void;
+  // @ts-ignore
 }>({ me: undefined });
 
 const MeContextProvider = ({ children }: { children: ReactNode }) => {
