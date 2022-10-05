@@ -1,5 +1,5 @@
 .profile-card {
-  width: 100%;
+	width: 100%;
 	border-radius: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -31,15 +31,14 @@
 }
 
 .cover-img-profile {
-  height: 10rem;
+	height: 10rem;
 }
 
 .profile-img {
 	width: 4rem;
 	position: absolute;
 	bottom: -2rem;
-  border-radius: 50%;
-  border: 2px solid var(--orange);
+	border-radius: 50%;
 	box-shadow: var(--profile-shadow);
 }
 
@@ -81,7 +80,7 @@
 
 .follow-status > div {
 	display: flex;
-	margin-bottom: .6rem;
+	margin-bottom: 0.6rem;
 	width: 90%;
 	justify-content: space-around;
 	align-items: center;
@@ -107,4 +106,15 @@
 .vl {
 	height: 100%;
 	border-left: 2px solid var(--hr-color);
+}
+
+.follow-btn {
+  display: flex;
+  margin-right: 4rem;
+  justify-content: flex-end;
+}
+
+.follow-btn > button {
+  padding: .6rem 1rem;
+
 }

@@ -35,18 +35,6 @@
 	font-weight: bold;
 }
 
-.fc-button {
-	height: 2rem;
-	padding: 0 16px;
-}
-
-.unfollow-button {
-	color: var(--orange);
-	border: 2px solid var(--orange);
-	cursor: pointer;
-	background: transparent;
-}
-
 .followers-card > span {
 	font-weight: bold;
 	color: var(--orange);

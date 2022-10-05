@@ -73,6 +73,17 @@ a {
 	pointer-events: none;
 }
 
+.fc-button {
+	height: 2rem;
+	padding: 0 16px;
+}
+
+.unfollow-button {
+	color: var(--orange);
+	border: 2px solid var(--orange);
+	background: transparent;
+}
+
 .profile-image {
 	border-radius: 50%;
 	width: 3rem;

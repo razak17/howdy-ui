@@ -1,25 +1,21 @@
-import { AxiosError } from 'axios';
 import { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 
 import profileImg from '../../assets/buddy.png';
 import { useMe } from '../../context/me';
-import { followUser, unfollowUser } from '../../lib/api/users';
-import { IUser, QueryKeys, TLocation } from '../../lib/types';
+import { IUser, TLocation } from '../../lib/types';
 import FollowersModal from '../ChatBox/FollowersModal/FollowersModal';
+import FollowButton from '../FollowButton/FollowButton';
 import Loader from '../Loader/Loader';
 import './FollowersCard.css';
 
-const FollowersCard = ({
-	location,
-	users,
-	isLoading
-}: {
+interface IProps {
 	location?: TLocation;
 	users: IUser[];
 	isLoading: boolean;
-}) => {
+}
+
+const FollowersCard = ({ location, users, isLoading }: IProps) => {
 	const [modalOpened, setModalOpened] = useState(false);
 
 	const { me } = useMe();
@@ -29,34 +25,6 @@ const FollowersCard = ({
 	if (location === 'modal') {
 		filteredUsers = users;
 	}
-
-	const queryClient = useQueryClient();
-
-	const followMutation = useMutation<string, AxiosError, Parameters<typeof followUser>['0']>(
-		followUser,
-		{
-			onSuccess: () => {
-				queryClient.invalidateQueries([QueryKeys.USERS]);
-				queryClient.invalidateQueries([QueryKeys.USER]);
-			}
-		}
-	);
-
-	const unfollowMutation = useMutation<string, AxiosError, Parameters<typeof unfollowUser>['0']>(
-		unfollowUser,
-		{
-			onSuccess: () => {
-				queryClient.invalidateQueries([QueryKeys.USERS]);
-				queryClient.invalidateQueries([QueryKeys.USER]);
-			}
-		}
-	);
-
-	const handleFollow = (user: IUser) => {
-		user.followers.includes(me?._id as string)
-			? unfollowMutation.mutate(user._id)
-			: followMutation.mutate(user._id);
-	};
 
 	return (
 		<div className='followers-card'>
@@ -76,21 +44,12 @@ const FollowersCard = ({
 									<span>
 										{user.firstName} {user.lastName}
 									</span>
-                <Link to={`/profile/${user._id}`}>
-                  <span>@{user.username}</span>
-                </Link>
+									<Link to={`/profile/${user._id}`}>
+										<span>@{user.username}</span>
+									</Link>
 								</div>
 							</div>
-							<button
-								className={
-									user?.followers.includes(me?._id as string)
-										? 'button fc-button unfollow-button'
-										: 'button fc-button'
-								}
-								onClick={() => handleFollow(user)}
-							>
-								{user.followers.includes(me?._id as string) ? 'Unfollow' : 'Follow'}
-							</button>
+							<FollowButton user={user} />
 						</div>
 					);
 			})}

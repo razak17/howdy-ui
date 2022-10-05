@@ -1,9 +1,10 @@
+import { useQuery } from 'react-query';
+
 import FollowersCard from '../FollowersCard/FollowersCard';
 import ProfileCard from '../ProfileCard/ProfileCard';
 import Searchbar from '../Searchbar/Searchbar';
 import UserInfo from '../UserInfo/UserInfo';
 import { useMe } from '../../context/me';
-import { useQuery } from 'react-query';
 import { IUser, QueryKeys, TLocation } from '../../lib/types';
 import { getUser, getUsers } from '../../lib/api/users';
 

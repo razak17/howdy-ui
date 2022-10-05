@@ -9,7 +9,9 @@ import { IPost, QueryKeys } from '../../lib/types';
 const Search = () => {
 	const query = useLocation().search;
 
-	const { data: posts, isLoading } = useQuery([QueryKeys.SEARCH, query], () => searchPosts(query));
+	const { data: posts, isLoading: postsIsLoading } = useQuery([QueryKeys.SEARCH, query], () =>
+		searchPosts(query)
+	);
 
 	console.log({ posts });
 
@@ -18,7 +20,7 @@ const Search = () => {
 			<LeftSidebar location='search' />
 			<MainContent
 				posts={posts as IPost[]}
-				postsIsLoading={isLoading}
+				postsIsLoading={postsIsLoading}
 				location='search'
 				query={query}
 			/>
