@@ -13,8 +13,6 @@ const Search = () => {
 		searchPosts(query)
 	);
 
-	console.log({ posts });
-
 	return (
 		<div className='home-container'>
 			<LeftSidebar location='search' />

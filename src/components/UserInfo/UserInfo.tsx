@@ -35,8 +35,6 @@ const UserInfo = () => {
 		mutation.mutate([]);
 	};
 
-	console.log({ user });
-
 	return (
 		<div className='info-card'>
 			<div className='info-head'>

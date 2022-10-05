@@ -77,7 +77,7 @@ const ProfileModal = ({
 		// 	data.append('file', coverImage);
 		// 	UserData.coverPicture = fileName;
 		// }
-		console.log({ formData });
+		{/* console.log({ formData }); */}
 		mutation.mutate({ ...formData, _id: user._id });
 	};
 

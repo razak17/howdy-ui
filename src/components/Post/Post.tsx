@@ -19,8 +19,6 @@ const Post = ({ post }: { post: IPost }) => {
 	const queryClient = useQueryClient();
 	const params = useLocation();
 
-	console.log({ params });
-
 	const { me } = useMe();
 
 	const { data: user } = useQuery([QueryKeys.USER, post._id], () => getUser(`${post.userId}`));
