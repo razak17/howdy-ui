@@ -72,9 +72,11 @@ const UserInfo = () => {
 				<span>{user?.workplace ? user.workplace : 'No Info'}</span>
 			</div>
 
-			<button className='button logout-button' onClick={handleLogOut}>
-				Log Out
-			</button>
+			{user?._id === me?._id && (
+				<button className='button logout-button' onClick={handleLogOut}>
+					Log Out
+				</button>
+			)}
 		</div>
 	);
 };
