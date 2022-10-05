@@ -28,6 +28,7 @@ const MainContent = ({ location, posts, postsIsLoading, query }: IProps) => {
 	);
 
 	if (isLoading) <Loader />;
+
 	return (
 		<div className='main-content'>
 			{user && location === 'profile' && (

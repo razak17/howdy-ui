@@ -18,6 +18,12 @@ export const getUserPosts = async (userId: string): Promise<IPost[]> => {
 	return res.data;
 };
 
+export const getTimeline = async (userId: string): Promise<IPost[]> => {
+	if (!userId) throw Error('userId is not defined.');
+	const res = await auth.get(`${postBase}/${userId}/feed`);
+	return res.data;
+};
+
 export const likePost = async (postId: string) => {
 	if (!postId) throw Error('postId is not defined.');
 	const res = await auth.put(`${postBase}/${postId}/like`);
