@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { UilPen } from '@iconscout/react-unicons';
-import ProfileModal from '../ProfileModal/ProfileModal';
-import './UserInfo.css';
-import { useMutation, useQuery } from 'react-query';
-import { IUser, QueryKeys } from '../../lib/types';
 import { AxiosError } from 'axios';
-import { logout } from '../../lib/api/auth';
+import { UilPen } from '@iconscout/react-unicons';
 import { useNavigate, useParams } from 'react-router-dom';
+import ProfileModal from '../ProfileModal/ProfileModal';
+import { useMutation, useQuery } from 'react-query';
+
+import { IUser, QueryKeys } from '../../lib/types';
+import { logout } from '../../lib/api/auth';
 import { getUser } from '../../lib/api/users';
 import { useMe } from '../../context/me';
 
+import './UserInfo.css';
 const UserInfo = () => {
 	const [modalOpened, setModalOpened] = useState(false);
 

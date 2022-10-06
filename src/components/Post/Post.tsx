@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { format } from 'timeago.js';
 
-import postPic from '../../assets/postpic1.jpg';
 import Comment from '../../assets/comment.png';
 import Share from '../../assets/share.png';
 import Heart from '../../assets/like.png';
@@ -22,7 +21,7 @@ const Post = ({ post }: { post: IPost }) => {
 
 	const { me } = useMe();
 
-	const { data: user } = useQuery([QueryKeys.USER, post._id], () => getUser(`${post.userId}`));
+	const { data: user } = useQuery([QueryKeys.USER, post._id], () => getUser(`${post?.userId}`));
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof likePost>['0']>(likePost, {
 		onSuccess: () => {
@@ -61,7 +60,7 @@ const Post = ({ post }: { post: IPost }) => {
 				</div>
 				<span className='post-desc'>{post.description}</span>
 			</div>
-			{post.image && <img src={postPic} alt='' />}
+			{post.image && <img src={post.image} alt='' />}
 			<div className='post-reactions'>
 				<img
 					src={post.likes.includes(me?._id as string) ? Heart : NotLike}

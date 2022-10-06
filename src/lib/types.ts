@@ -44,6 +44,11 @@ export interface IPost extends MongoDocument {
 	dislikes: string[];
 }
 
+export interface INewPost {
+	description: string;
+	image?: string;
+}
+
 /* eslint-disable no-unused-vars */
 export enum QueryKeys {
 	ME = 'Me',

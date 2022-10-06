@@ -8,7 +8,7 @@ const Posts = ({ isLoading, posts }: { isLoading: boolean; posts: IPost[] }) => 
 			{isLoading ? (
 				<Loader />
 			) : (
-				posts?.map((post, id) => {
+				posts && posts.map((post, id) => {
 					return <Post post={post} key={id} />;
 				})
 			)}

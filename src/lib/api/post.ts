@@ -1,9 +1,9 @@
-import { IPost } from '../types';
+import { INewPost, IPost } from '../types';
 import { auth, postBase } from './base';
 
-export const createPost = async (description: string): Promise<IPost> => {
-	if (!description) throw Error('description is not defined.');
-	const res = await auth.post(`${postBase}`, { description });
+export const createPost = async (payload: INewPost): Promise<IPost> => {
+	if (!payload) throw Error('payload is not defined.');
+	const res = await auth.post(`${postBase}`, { ...payload });
 	return res.data;
 };
 
