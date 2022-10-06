@@ -115,7 +115,6 @@ const ProfileModal = ({
 	const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		mutation.mutate({ ...formData, _id: user._id });
-		console.log({ formData });
 	};
 
 	return (

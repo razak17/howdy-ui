@@ -15,8 +15,6 @@ const Profile = () => {
 		getUserPosts(currentUserId as string)
 	);
 
-	console.log({ posts });
-
 	return (
 		<div className='profile'>
 			<LeftSidebar location='profile' />
