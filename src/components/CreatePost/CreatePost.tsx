@@ -5,12 +5,12 @@ import { UilLocationPoint } from '@iconscout/react-unicons';
 import { UilSchedule } from '@iconscout/react-unicons';
 import { UilTimes } from '@iconscout/react-unicons';
 
-import profileImg from '../../assets/buddy.png';
-import './CreatePost.css';
 import { useMutation, useQueryClient } from 'react-query';
 import { AxiosError } from 'axios';
 import { createPost } from '../../lib/api/post';
 import { IPost, QueryKeys } from '../../lib/types';
+import { defaultProfileImg } from '../../lib/constants';
+import './CreatePost.css';
 
 const CreatePost = () => {
 	const [image, setImage] = useState<File | null>(null);
@@ -44,7 +44,7 @@ const CreatePost = () => {
 
 	return (
 		<div className='create-post'>
-			<img src={profileImg} className='profile-image' alt='profileImage' />
+			<img src={defaultProfileImg} className='profile-image' alt='profileImage' />
 			<div>
 				<textarea placeholder="What's happening?" required ref={desc} />
 				<div className='post-options'>

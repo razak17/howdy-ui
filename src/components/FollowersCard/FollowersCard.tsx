@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import profileImg from '../../assets/buddy.png';
 import { useMe } from '../../context/me';
+import { defaultProfileImg } from '../../lib/constants';
 import { IUser, TLocation } from '../../lib/types';
 import FollowersModal from '../ChatBox/FollowersModal/FollowersModal';
 import FollowButton from '../FollowButton/FollowButton';
@@ -36,7 +36,7 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 						<div key={user._id} className='follower'>
 							<div>
 								<img
-									src={user.profilePicture ? profileImg : profileImg}
+									src={user.profilePicture ? user.profilePicture : defaultProfileImg}
 									alt='profileImage'
 									className='profile-image'
 								/>

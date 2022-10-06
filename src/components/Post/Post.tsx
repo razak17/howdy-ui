@@ -8,12 +8,12 @@ import Comment from '../../assets/comment.png';
 import Share from '../../assets/share.png';
 import Heart from '../../assets/like.png';
 import NotLike from '../../assets/notlike.png';
-import profileImg from '../../assets/buddy.png';
 import { IPost, QueryKeys } from '../../lib/types';
 import { getUser } from '../../lib/api/users';
 import { likePost } from '../../lib/api/post';
 import { useMe } from '../../context/me';
 import './Post.css';
+import { defaultProfileImg } from '../../lib/constants';
 
 const Post = ({ post }: { post: IPost }) => {
 	const queryClient = useQueryClient();
@@ -46,7 +46,7 @@ const Post = ({ post }: { post: IPost }) => {
 				<div>
 					<img
 						className='profile-image'
-						src={user?.profilePicture ? user.profilePicture : profileImg}
+						src={user?.profilePicture ? user.profilePicture : defaultProfileImg}
 						alt=''
 					/>
 					<div className='profile-user'>
