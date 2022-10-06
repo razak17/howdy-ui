@@ -6,6 +6,10 @@ import img2 from '../assets/img2.png';
 import img3 from '../assets/img3.png';
 import img4 from '../assets/img4.jpg';
 
+export const defaultProfileImg = 'https://dergipark.org.tr/assets/app/images/buddy_sample.png';
+export const defaultCoverImg =
+	'https://firebasestorage.googleapis.com/v0/b/howwdy-2f2ee.appspot.com/o/cover.jpg?alt=media&token=5324a596-ee81-45a6-929a-c23072f88c53';
+
 export const posts = [
 	{
 		img: postPic1,

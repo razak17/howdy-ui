@@ -1,7 +1,10 @@
 import { Modal, useMantineTheme } from '@mantine/core';
-import { AxiosError } from 'axios';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { AxiosError } from 'axios';
+
+import app from '../../lib/firebase';
 import { updateUser } from '../../lib/api/users';
 import { IUser, QueryKeys } from '../../lib/types';
 
@@ -14,19 +17,10 @@ const ProfileModal = ({
 	setModalOpened: Dispatch<SetStateAction<boolean>>;
 	user: IUser;
 }) => {
-	const [profileImage, setProfileImage] = useState<File | null>(null);
-	const [coverImage, setCoverImage] = useState<File | null>(null);
+	const [profilePicture, setProfilePicture] = useState<File | null>(null);
+	const [coverPicture, setCoverPicture] = useState<File | null>(null);
 
-	const {
-		firstName,
-		lastName,
-		workplace,
-		city,
-		country,
-		relationshipStatus
-		// coverPicture,
-		// profilePicture
-	} = user;
+	const { firstName, lastName, workplace, city, country, relationshipStatus } = user;
 
 	const [formData, setFormData] = useState({
 		firstName,
@@ -34,51 +28,94 @@ const ProfileModal = ({
 		workplace,
 		city,
 		country,
-		relationshipStatus
-		// profilePicture,
-		// coverPicture
+		relationshipStatus,
+		profilePicture: user.profilePicture,
+		coverPicture: user.coverPicture
 	});
+
+	const [coverProgress, setCoverProgress] = useState(0);
+	const [profileProgress, setProfileProgress] = useState(0);
+	const [uploading, setUploading] = useState(false);
 
 	const { colorScheme, colors } = useMantineTheme();
 	const queryClient = useQueryClient();
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
 	const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files && e.target.files[0]) {
+		if (e.target.files) {
 			const img = e.target.files[0];
-			e.target.name === 'profileImage' ? setProfileImage(img) : setCoverImage(img);
+			e.target.name === 'profile' ? setProfilePicture(img) : setCoverPicture(img);
 		}
+	};
+
+	const uploadFile = (file: File, urlType: 'profilePicture' | 'coverPicture') => {
+		const storage = getStorage(app);
+		const fileName = new Date().getTime() + file.name;
+		const storageRef = ref(storage, fileName);
+		const uploadTask = uploadBytesResumable(storageRef, file);
+
+		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				/* eslint-disable-next-line max-len */
+				urlType === 'profilePicture'
+					? setProfileProgress(Math.round(progress))
+					: setCoverProgress(Math.round(progress));
+				switch (snapshot.state) {
+					case 'paused':
+						console.log('Upload is paused');
+						break;
+					case 'running':
+						setUploading(true);
+						console.log('Upload is running');
+						break;
+					default:
+						break;
+				}
+			},
+			(error) => {
+				throw error;
+			},
+			() => {
+				setUploading(false);
+				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					setFormData((prev) => {
+						return { ...prev, [urlType]: downloadURL };
+					});
+				});
+			}
+		);
 	};
 
 	const mutation = useMutation<IUser, AxiosError, Parameters<typeof updateUser>['0']>(updateUser, {
 		onSuccess: () => {
-			queryClient.invalidateQueries(QueryKeys.USER_PROFILE);
+			queryClient.invalidateQueries([QueryKeys.USER_PROFILE, QueryKeys.USER_POSTS]);
 			setModalOpened(false);
+			if (profilePicture) {
+				setProfilePicture(null);
+			}
+			if (coverPicture) {
+				setCoverPicture(null);
+			}
 		}
 	});
 
+	useEffect(() => {
+		profilePicture && uploadFile(profilePicture, 'profilePicture');
+	}, [profilePicture]);
+
+	useEffect(() => {
+		coverPicture && uploadFile(coverPicture, 'coverPicture');
+	}, [coverPicture]);
+
 	const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// const UserData = formData;
-		// if (profileImage) {
-		// 	const data = new FormData();
-		// 	const fileName = Date.now() + profileImage.name;
-		// 	data.append('name', fileName);
-		// 	data.append('file', profileImage);
-		// 	UserData.profilePicture = fileName;
-		// }
-		// if (coverImage) {
-		// 	const data = new FormData();
-		// 	const fileName = Date.now() + coverImage.name;
-		// 	data.append('name', fileName);
-		// 	data.append('file', coverImage);
-		// 	UserData.coverPicture = fileName;
-		// }
-		{/* console.log({ formData }); */}
 		mutation.mutate({ ...formData, _id: user._id });
+		console.log({ formData });
 	};
 
 	return (
@@ -95,7 +132,7 @@ const ProfileModal = ({
 				<div className='form-item'>
 					<input
 						value={formData.firstName}
-						onChange={handleChange}
+						onChange={onInputChange}
 						type='text'
 						placeholder='First Name'
 						name='firstName'
@@ -103,7 +140,7 @@ const ProfileModal = ({
 					/>
 					<input
 						value={formData.lastName}
-						onChange={handleChange}
+						onChange={onInputChange}
 						type='text'
 						placeholder='Last Name'
 						name='lastName'
@@ -114,7 +151,7 @@ const ProfileModal = ({
 				<div className='form-item'>
 					<input
 						value={formData.workplace}
-						onChange={handleChange}
+						onChange={onInputChange}
 						type='text'
 						placeholder='Works at'
 						name='workplace'
@@ -125,7 +162,7 @@ const ProfileModal = ({
 				<div className='form-item'>
 					<input
 						value={formData.city}
-						onChange={handleChange}
+						onChange={onInputChange}
 						type='text'
 						placeholder='City'
 						name='city'
@@ -133,7 +170,7 @@ const ProfileModal = ({
 					/>
 					<input
 						value={formData.country}
-						onChange={handleChange}
+						onChange={onInputChange}
 						type='text'
 						placeholder='Country'
 						name='country'
@@ -144,7 +181,7 @@ const ProfileModal = ({
 				<div className='form-item'>
 					<input
 						value={formData.relationshipStatus}
-						onChange={handleChange}
+						onChange={onInputChange}
 						type='text'
 						className='info-input'
 						placeholder='Relationship Status'
@@ -153,13 +190,13 @@ const ProfileModal = ({
 				</div>
 
 				<div className='form-item'>
-					Profile image
-					<input type='file' name='profileImage' onChange={onImageChange} />
-					Cover image
-					<input type='file' name='coverImage' onChange={onImageChange} />
+					<p> Profile image{profileProgress > 0 && `: ${profileProgress}`}</p>
+					<input type='file' accept='image/*' name='profile' onChange={onImageChange} />
+					<p>Cover image{coverProgress > 0 && `: ${coverProgress}`}</p>
+					<input type='file' accept='image/*' name='cover' onChange={onImageChange} />
 				</div>
 
-				<button className='button info-button' type='submit'>
+				<button disabled={uploading} className='button info-button' type='submit'>
 					Update
 				</button>
 			</form>

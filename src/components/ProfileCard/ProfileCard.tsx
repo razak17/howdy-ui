@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import coverImg from '../../assets/cover.jpg';
-import profileImg from '../../assets/buddy.png';
 import { IUser, TLocation } from '../../lib/types';
 import { useMe } from '../../context/me';
 import './ProfileCard.css';
 import FollowButton from '../FollowButton/FollowButton';
+import { defaultCoverImg, defaultProfileImg } from '../../lib/constants';
 
 interface IProps {
 	location?: TLocation;
@@ -20,12 +19,12 @@ const ProfileCard = ({ location, user, postsLen }: IProps) => {
 			<div className='profile-imgs'>
 				<img
 					className={location === 'profile' ? 'cover-img cover-img-profile' : 'cover-img'}
-					src={user?.coverPicture ? coverImg : coverImg}
+					src={user?.coverPicture ? user.coverPicture : defaultCoverImg}
 					alt='coverImage'
 				/>
 				<img
 					className='profile-img'
-					src={user?.profilePicture ? profileImg : profileImg}
+					src={user?.profilePicture ? user.profilePicture : defaultProfileImg}
 					alt='profileImage'
 				/>
 			</div>
