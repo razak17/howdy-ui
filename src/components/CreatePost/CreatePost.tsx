@@ -4,8 +4,6 @@ import { AxiosError } from 'axios';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { UilScenery } from '@iconscout/react-unicons';
 import { UilPlayCircle } from '@iconscout/react-unicons';
-import { UilLocationPoint } from '@iconscout/react-unicons';
-import { UilSchedule } from '@iconscout/react-unicons';
 import { UilTimes } from '@iconscout/react-unicons';
 
 import { createPost } from '../../lib/api/post';
@@ -103,7 +101,9 @@ const CreatePost = () => {
 		<div className='create-post'>
 			<img src={defaultProfileImg} className='profile-image' alt='profileImage' />
 			<div>
-				<textarea placeholder="What's happening?" ref={desc} />
+				<div className='text-textarea'>
+					<textarea rows={5} placeholder="What's happening?" ref={desc} />
+				</div>
 				<div className='post-options'>
 					<div className='option' onClick={() => imageRef.current?.click()}>
 						<UilScenery />
@@ -112,14 +112,6 @@ const CreatePost = () => {
 					<div className='option'>
 						<UilPlayCircle />
 						Video
-					</div>
-					<div className='option'>
-						<UilLocationPoint />
-						Location
-					</div>
-					<div className='option'>
-						<UilSchedule />
-						Shedule
 					</div>
 					<button
 						className='button ps-button'

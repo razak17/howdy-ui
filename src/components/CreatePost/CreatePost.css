@@ -11,14 +11,17 @@
 	flex-direction: column;
 	width: 100%;
 	gap: 1rem;
+  overflow: auto;
 }
 
-.create-post > div > textarea {
+.text-textarea {
+}
+
+.text-textarea > textarea {
 	background-color: var(--input-color);
 	border-radius: 2rem;
-	height: 100px;
-  width: 100%;
 	padding: 1rem 1.5rem;
+  width: 100%;
 	font-size: 14px;
 	border: none;
 	outline: none;
@@ -27,7 +30,7 @@
 
 .post-options {
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
 }
 
 .option {
@@ -64,6 +67,7 @@
 .ps-button {
 	padding: 5px 20px;
 	font-size: 12px;
+  margin-left: auto;
 }
 
 .preview-image {

@@ -218,3 +218,25 @@ a {
 .check-auth > a:hover {
 	color: var(--orange);
 }
+
+/* Media Queries */
+@media (max-width: 1080px) {
+	.home-container {
+		grid-template-columns: 20rem auto;
+	}
+
+	.main-content {
+		overflow: hidden;
+		padding-right: 0;
+		height: 100%;
+	}
+}
+
+@media (max-width: 756px) {
+	.home-container {
+		grid-template-columns: auto;
+	}
+	.left-sidebar {
+		height: 100%;
+	}
+}
