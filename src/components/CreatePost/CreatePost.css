@@ -14,9 +14,6 @@
   overflow: auto;
 }
 
-.text-textarea {
-}
-
 .text-textarea > textarea {
 	background-color: var(--input-color);
 	border-radius: 2rem;

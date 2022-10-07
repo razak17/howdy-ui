@@ -32,3 +32,13 @@
 .form {
 	display: flex;
 }
+
+@media (max-width: 756px) {
+	.search-bar, .search, .form {
+		width: 100%;
+	}
+
+  .search-icon {
+    margin-left: auto;
+  }
+}

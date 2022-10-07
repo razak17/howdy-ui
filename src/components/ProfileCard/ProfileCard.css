@@ -109,12 +109,17 @@
 }
 
 .follow-btn {
-  display: flex;
-  margin-right: 4rem;
-  justify-content: flex-end;
+	display: flex;
+	margin-right: 4rem;
+	justify-content: flex-end;
 }
 
 .follow-btn > button {
-  padding: .6rem 1rem;
+	padding: 0.6rem 1rem;
+}
 
+@media (max-width: 756px) {
+	.profile-card {
+		display: none;
+	}
 }
