@@ -91,6 +91,7 @@ const ProfileModal = ({
 		);
 	};
 
+	/* eslint-disable-next-line max-len */
 	const mutation = useMutation<IUser, AxiosError, Parameters<typeof updateUser>['0']>(updateUser, {
 		onSuccess: () => {
 			queryClient.invalidateQueries([QueryKeys.USER_PROFILE, QueryKeys.USER_POSTS]);

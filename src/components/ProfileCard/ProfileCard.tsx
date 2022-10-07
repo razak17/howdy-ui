@@ -36,7 +36,7 @@ const ProfileCard = ({ location, user, postsLen }: IProps) => {
 			</div>
 			{location === 'profile' && me?._id !== user._id && (
 				<div className='follow-btn'>
-            <FollowButton user={user} />
+					<FollowButton user={user} />
 				</div>
 			)}
 			<div className='follow-status'>

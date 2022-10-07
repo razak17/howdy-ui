@@ -36,6 +36,7 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 						<div key={user._id} className='follower'>
 							<div>
 								<img
+									/* eslint-disable-next-line max-len */
 									src={user.profilePicture ? user.profilePicture : defaultProfileImg}
 									alt='profileImage'
 									className='profile-image'

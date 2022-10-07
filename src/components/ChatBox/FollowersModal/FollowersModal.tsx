@@ -25,11 +25,7 @@ const FollowersModal = ({
 			opened={modalOpened}
 			onClose={() => setModalOpened(false)}
 		>
-			<FollowersCard
-				location='modal'
-				isLoading={isLoading}
-				users={users as IUser[]}
-			/>
+			<FollowersCard location='modal' isLoading={isLoading} users={users as IUser[]} />
 		</Modal>
 	);
 };

@@ -1,7 +1,6 @@
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
 
-
 import { useMe } from '../../context/me';
 import { followUser, unfollowUser } from '../../lib/api/users';
 import { IUser, QueryKeys } from '../../lib/types';

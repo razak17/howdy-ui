@@ -10,7 +10,7 @@ import CreatePost from '../CreatePost/CreatePost';
 import Posts from '../Posts/Posts';
 
 interface IProps {
-  query?: string
+	query?: string;
 	location: TLocation;
 	posts: IPost[];
 	postsIsLoading: boolean;
@@ -35,7 +35,7 @@ const MainContent = ({ location, posts, postsIsLoading, query }: IProps) => {
 				<ProfileCard postsLen={posts?.length as number} user={user} location='profile' />
 			)}
 			{location === 'home' && <CreatePost />}
-      {location === 'search' && <h1>Search Results for &quot;{query?.split("=")[1]}&quot;</h1>}
+			{location === 'search' && <h1>Search Results for &quot;{query?.split('=')[1]}&quot;</h1>}
 			<Posts posts={posts as IPost[]} isLoading={postsIsLoading} />
 		</div>
 	);

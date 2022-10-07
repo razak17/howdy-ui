@@ -41,6 +41,7 @@ const LoginForm = () => {
 				<Error error={mutation?.error?.response?.data as string} />
 			) : null}
 			<div className='form-item'>
+				{/* eslint-disable-next-line max-len */}
 				<Input required type='text' placeholder='Email' {...loginForm('email')} error={errors.email} />
 			</div>
 			<div className='form-item'>

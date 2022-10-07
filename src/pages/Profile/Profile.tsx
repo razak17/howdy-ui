@@ -19,6 +19,7 @@ const Profile = () => {
 		<div className='profile'>
 			<LeftSidebar location='profile' />
 			<div className='profile-center'>
+				{/* eslint-disable-next-line max-len */}
 				<MainContent location='profile' posts={posts as IPost[]} postsIsLoading={isLoading} />
 			</div>
 			<RightSidebar />

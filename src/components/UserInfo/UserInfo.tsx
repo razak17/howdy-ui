@@ -26,7 +26,7 @@ const UserInfo = () => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof logout>>(logout, {
 		onSuccess: () => {
-      refetch();
+			refetch();
 			navigate('/login', { replace: true });
 		}
 	});

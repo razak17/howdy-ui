@@ -12,7 +12,7 @@ const MeContext = createContext<{
 		/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 	) => any;
 	remove?: () => void;
-  // @ts-ignore
+	// @ts-ignore
 }>({ me: undefined });
 
 const MeContextProvider = ({ children }: { children: ReactNode }) => {
