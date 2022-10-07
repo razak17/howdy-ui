@@ -13,6 +13,6 @@ Built with React.
 
 ## TODO
 
-- Upload images to firebase (have default cover and profile images)
-- time ago for post
+✅ Upload images to firebase (have default cover and profile images)
+✅ time ago for post
 - make relationship status a select field
