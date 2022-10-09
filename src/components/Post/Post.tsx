@@ -16,7 +16,6 @@ import { defaultProfileImg } from '../../lib/constants';
 
 const Post = ({ post }: { post: IPost }) => {
 	const queryClient = useQueryClient();
-	const params = useLocation();
 
 	const { me } = useMe();
 
@@ -24,13 +23,7 @@ const Post = ({ post }: { post: IPost }) => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof likePost>['0']>(likePost, {
 		onSuccess: () => {
-			if (params.pathname === '/') {
-				queryClient.invalidateQueries([QueryKeys.POSTS]);
-			} else if (params.pathname === '/search') {
-				queryClient.invalidateQueries([QueryKeys.SEARCH]);
-			} else {
-				queryClient.invalidateQueries([QueryKeys.USER_POSTS]);
-			}
+			queryClient.invalidateQueries([QueryKeys.POSTS, QueryKeys.SEARCH, QueryKeys.USER_POSTS]);
 		}
 	});
 

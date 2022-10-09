@@ -14,9 +14,7 @@ const FollowButton = ({ user }: { user: IUser }) => {
 		followUser,
 		{
 			onSuccess: () => {
-				queryClient.invalidateQueries([QueryKeys.USERS]);
-				queryClient.invalidateQueries([QueryKeys.USER]);
-				queryClient.invalidateQueries([QueryKeys.POSTS]);
+				queryClient.invalidateQueries([QueryKeys.USERS, QueryKeys.USER, QueryKeys.POSTS]);
 			}
 		}
 	);
@@ -25,28 +23,24 @@ const FollowButton = ({ user }: { user: IUser }) => {
 		unfollowUser,
 		{
 			onSuccess: () => {
-				queryClient.invalidateQueries([QueryKeys.USERS]);
-				queryClient.invalidateQueries([QueryKeys.USER]);
-				queryClient.invalidateQueries([QueryKeys.POSTS]);
+				queryClient.invalidateQueries([QueryKeys.USERS, QueryKeys.USER, QueryKeys.POSTS]);
 			}
 		}
 	);
 
-	const handleFollow = (user: IUser) => {
-		user.followers.includes(me?._id as string)
-			? unfollowMutation.mutate(user._id)
-			: followMutation.mutate(user._id);
+	const isFollowing = user.followers.includes(me?._id as string);
+
+	const handleFollow = () => {
+		isFollowing ? unfollowMutation.mutate(user._id) : followMutation.mutate(user._id);
 	};
+
 	return (
 		<button
-			className={
-				user.followers.includes(me?._id as string)
-					? 'button fc-button unfollow-button'
-					: 'button fc-button'
-			}
-			onClick={() => handleFollow(user)}
+			className={isFollowing ? 'button fc-button unfollow-button' : 'button fc-button'}
+			onClick={handleFollow}
+      disabled={followMutation.isLoading || unfollowMutation.isLoading}
 		>
-			{user.followers.includes(me?._id as string) ? 'Unfollow' : 'Follow'}
+			{isFollowing ? 'Unfollow' : 'Follow'}
 		</button>
 	);
 };
