@@ -25,10 +25,10 @@ const ProfileModal = ({
 	const [formData, setFormData] = useState({
 		firstName,
 		lastName,
-		workplace,
-		city,
-		country,
-		relationshipStatus,
+		workplace: workplace || '',
+		city: city || '',
+		country: country || '',
+		relationshipStatus: relationshipStatus || '',
 		profilePicture: user.profilePicture,
 		coverPicture: user.coverPicture
 	});
@@ -94,7 +94,9 @@ const ProfileModal = ({
 	/* eslint-disable-next-line max-len */
 	const mutation = useMutation<IUser, AxiosError, Parameters<typeof updateUser>['0']>(updateUser, {
 		onSuccess: () => {
-			queryClient.invalidateQueries([QueryKeys.USER_PROFILE, QueryKeys.USER_POSTS]);
+			queryClient.invalidateQueries([QueryKeys.USER_PROFILE]);
+			queryClient.invalidateQueries([QueryKeys.USER_POSTS]);
+			queryClient.invalidateQueries([QueryKeys.USER]);
 			setModalOpened(false);
 			if (profilePicture) {
 				setProfilePicture(null);
