@@ -20,11 +20,17 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 
 	const { me } = useMe();
 
-	let filteredUsers = users ? [users[0], users[1]] : null;
+	const otherUsersExist = users.length > 1;
+
+	let filteredUsers = users && otherUsersExist ? [users[0], users[1]] : null;
 
 	if (location === 'modal') {
 		filteredUsers = users;
 	}
+
+	if (!otherUsersExist) <div className='followers-card'>No Other users found</div>;
+
+	console.log({ users });
 
 	return (
 		<div className='followers-card'>
