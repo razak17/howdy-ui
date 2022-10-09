@@ -14,7 +14,9 @@ const FollowButton = ({ user }: { user: IUser }) => {
 		followUser,
 		{
 			onSuccess: () => {
-				queryClient.invalidateQueries([QueryKeys.USERS, QueryKeys.USER, QueryKeys.POSTS]);
+				queryClient.invalidateQueries([QueryKeys.USERS]);
+				queryClient.invalidateQueries([QueryKeys.USER]);
+				queryClient.invalidateQueries([QueryKeys.POSTS]);
 			}
 		}
 	);
@@ -23,7 +25,9 @@ const FollowButton = ({ user }: { user: IUser }) => {
 		unfollowUser,
 		{
 			onSuccess: () => {
-				queryClient.invalidateQueries([QueryKeys.USERS, QueryKeys.USER, QueryKeys.POSTS]);
+				queryClient.invalidateQueries([QueryKeys.USERS]);
+				queryClient.invalidateQueries([QueryKeys.USER]);
+				queryClient.invalidateQueries([QueryKeys.POSTS]);
 			}
 		}
 	);
