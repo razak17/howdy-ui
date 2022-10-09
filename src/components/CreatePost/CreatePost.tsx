@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { AxiosError } from 'axios';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { UilScenery } from '@iconscout/react-unicons';
@@ -11,6 +11,8 @@ import { INewPost, IPost, QueryKeys } from '../../lib/types';
 import { defaultProfileImg } from '../../lib/constants';
 import app from '../../lib/firebase';
 import './CreatePost.css';
+import { useMe } from '../../context/me';
+import { getUser } from '../../lib/api/users';
 
 const CreatePost = () => {
 	const [image, setImage] = useState<File | null>(null);
@@ -18,6 +20,7 @@ const CreatePost = () => {
 	const [uploading, setUploading] = useState(false);
 
 	const queryClient = useQueryClient();
+	const { me } = useMe();
 
 	const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files[0]) {
@@ -97,9 +100,15 @@ const CreatePost = () => {
 		}
 	};
 
+	const { data: user } = useQuery([QueryKeys.USER], () => getUser(`${me?._id}`));
+
 	return (
 		<div className='create-post'>
-			<img src={defaultProfileImg} className='profile-image' alt='profileImage' />
+			<img
+				src={user?.profilePicture || defaultProfileImg}
+				className='profile-image'
+				alt='profileImage'
+			/>
 			<div>
 				<div className='text-textarea'>
 					<textarea rows={5} placeholder="What's happening?" ref={desc} />
