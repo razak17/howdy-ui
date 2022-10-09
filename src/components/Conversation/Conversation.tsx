@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import profileImg from '../../assets/profile.jpg';
+import { defaultProfileImg } from '../../lib/constants';
 
 const Conversation = ({
 	data,
@@ -19,7 +19,7 @@ const Conversation = ({
 				<div>
 					{online && <div className='online-dot'></div>}
 					<img
-						src={profileImg}
+						src={defaultProfileImg}
 						alt='Profile'
 						className='followerImage'
 						style={{ width: '50px', height: '50px' }}

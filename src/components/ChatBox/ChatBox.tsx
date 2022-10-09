@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import InputEmoji from 'react-input-emoji';
 
-import profileImg from '../../assets/profile.jpg';
+import { defaultProfileImg } from '../../lib/constants';
 
 import './ChatBox.css';
 
@@ -31,7 +30,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }: any) =>
 							<div className='follower'>
 								<div>
 									<img
-										src={profileImg}
+										src={defaultProfileImg}
 										alt='Profile'
 										className='follower-image'
 										style={{ width: '50px', height: '50px' }}
@@ -67,7 +66,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }: any) =>
 						{/* chat-sender */}
 						<div className='chat-sender'>
 							<div onClick={() => imageRef?.current?.click()}>+</div>
-							<InputEmoji value={newMessage} onChange={handleChange} />
+							{/* <InputEmoji value={newMessage} onChange={handleChange} /> */}
 							<div className='send-button button' onClick={handleSend}>
 								Send
 							</div>

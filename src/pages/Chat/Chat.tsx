@@ -4,7 +4,6 @@ import ChatBox from '../../components/ChatBox/ChatBox';
 import Conversation from '../../components/Conversation/Conversation';
 import NavIcons from '../../components/NavIcons/NavIcons';
 import Searchbar from '../../components/Searchbar/Searchbar';
-import { chats } from '../../lib/constants';
 import './Chat.css';
 
 const Chat = () => {
