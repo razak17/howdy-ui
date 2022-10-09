@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { UilPen } from '@iconscout/react-unicons';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProfileModal from '../ProfileModal/ProfileModal';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { IUser, QueryKeys } from '../../lib/types';
 import { logout } from '../../lib/api/auth';
@@ -16,6 +16,7 @@ const UserInfo = () => {
 
 	const params = useParams();
 	const navigate = useNavigate();
+  const queryClient = useQueryClient();
 	const { me, refetch } = useMe();
 
 	const currentUserId = params.id;
@@ -27,7 +28,9 @@ const UserInfo = () => {
 	const mutation = useMutation<string, AxiosError, Parameters<typeof logout>>(logout, {
 		onSuccess: () => {
 			refetch();
+			queryClient.invalidateQueries([QueryKeys.USER]);
 			navigate('/login', { replace: true });
+      window.location.reload();
 		}
 	});
 
