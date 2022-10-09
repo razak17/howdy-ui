@@ -20,9 +20,13 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 
 	const { me } = useMe();
 
-	const otherUsersExist = users.length > 1;
 
-	let filteredUsers = users && otherUsersExist ? [users[0], users[1]] : null;
+	const usersWithoutCurrent = users.filter((user) => user._id !== me?._id);
+
+  const otherUsersExist = usersWithoutCurrent.length > 1;
+
+	let filteredUsers =
+		users && otherUsersExist ? [usersWithoutCurrent[0], usersWithoutCurrent[1]] : null;
 
 	if (location === 'modal') {
 		filteredUsers = users;
@@ -35,28 +39,27 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 			<h3>People you may know</h3>
 			{isLoading && <Loader />}
 			{filteredUsers?.map((user) => {
-				if (user._id !== me?._id)
-					return (
-						<div key={user._id} className='follower'>
-							<div>
-								<img
-									/* eslint-disable-next-line max-len */
-									src={user.profilePicture ? user.profilePicture : defaultProfileImg}
-									alt='profileImage'
-									className='profile-image'
-								/>
-								<div className='name'>
-									<span>
-										{user.firstName} {user.lastName}
-									</span>
-									<Link to={`/profile/${user._id}`}>
-										<span>@{user.username}</span>
-									</Link>
-								</div>
+				return (
+					<div key={user._id} className='follower'>
+						<div>
+							<img
+								/* eslint-disable-next-line max-len */
+								src={user.profilePicture ? user.profilePicture : defaultProfileImg}
+								alt='profileImage'
+								className='profile-image'
+							/>
+							<div className='name'>
+								<span>
+									{user.firstName} {user.lastName}
+								</span>
+								<Link to={`/profile/${user._id}`}>
+									<span>@{user.username}</span>
+								</Link>
 							</div>
-							<FollowButton user={user} />
 						</div>
-					);
+						<FollowButton user={user} />
+					</div>
+				);
 			})}
 
 			{!location && <span onClick={() => setModalOpened(true)}>Show more</span>}
