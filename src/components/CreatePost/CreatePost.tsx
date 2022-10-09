@@ -96,7 +96,6 @@ const CreatePost = () => {
 		if (text) {
 			newPost.description = text;
 			mutation.mutate(newPost);
-			console.log({ newPost });
 		}
 	};
 

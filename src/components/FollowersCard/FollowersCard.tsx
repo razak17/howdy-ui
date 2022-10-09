@@ -30,8 +30,6 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 
 	if (!otherUsersExist) <div className='followers-card'>No Other users found</div>;
 
-	console.log({ users });
-
 	return (
 		<div className='followers-card'>
 			<h3>People you may know</h3>
