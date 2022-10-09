@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { format } from 'timeago.js';
 
@@ -23,6 +23,7 @@ const Post = ({ post }: { post: IPost }) => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof likePost>['0']>(likePost, {
 		onSuccess: () => {
+			/* eslint-disable-next-line max-len */
 			queryClient.invalidateQueries([QueryKeys.POSTS, QueryKeys.SEARCH, QueryKeys.USER_POSTS]);
 		}
 	});
