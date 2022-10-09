@@ -24,7 +24,9 @@ const Post = ({ post }: { post: IPost }) => {
 	const mutation = useMutation<string, AxiosError, Parameters<typeof likePost>['0']>(likePost, {
 		onSuccess: () => {
 			/* eslint-disable-next-line max-len */
-			queryClient.invalidateQueries([QueryKeys.POSTS, QueryKeys.SEARCH, QueryKeys.USER_POSTS]);
+			queryClient.invalidateQueries([QueryKeys.POSTS]);
+			queryClient.invalidateQueries([QueryKeys.SEARCH]);
+			queryClient.invalidateQueries([QueryKeys.USER_POSTS]);
 		}
 	});
 
