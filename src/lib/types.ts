@@ -56,6 +56,7 @@ export enum QueryKeys {
 	USER = 'User',
 	USERS = 'Users',
 	POSTS = 'Posts',
+	POST = 'Post',
 	USER_PROFILE = 'UserProfile',
 	USER_POSTS = 'UserPosts',
 	SEARCH = 'Search'

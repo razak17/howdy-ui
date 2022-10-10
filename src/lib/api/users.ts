@@ -11,9 +11,9 @@ const MeSchema = z.object({
 
 export type MeResponseType = z.infer<typeof MeSchema>;
 
-export const getMe = async () => {
+export const getMe = async (): Promise<IUser> => {
 	const res = await auth.get(`${userBase}/me`);
-	return MeSchema.parse(res.data);
+	return res.data;
 };
 
 export const getUser = async (userId: string): Promise<IUser> => {

@@ -9,8 +9,8 @@ const Posts = ({ isLoading, posts }: { isLoading: boolean; posts: IPost[] }) => 
 				<Loader />
 			) : (
 				posts &&
-				posts.map((post, id) => {
-					return <Post post={post} key={id} />;
+				posts.map((post) => {
+					return <Post post={post} key={post._id} />;
 				})
 			)}
 		</div>
