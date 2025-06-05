@@ -17,9 +17,11 @@ const LoginForm = () => {
 	const queryClient = useQueryClient();
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof login>['0']>(login, {
-		onSuccess: () => {
+		onSuccess: async () => {
+			// Wait for the ME query to refetch and complete
+			await queryClient.invalidateQueries([QueryKeys.ME]);
+			await queryClient.refetchQueries([QueryKeys.ME]);
 			navigate(state.state || '/', { replace: true });
-			queryClient.invalidateQueries([QueryKeys.ME]);
 		}
 	});
 

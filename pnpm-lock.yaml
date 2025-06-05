@@ -15,8 +15,8 @@ importers:
         specifier: ^2.9.8
         version: 2.9.11(react-hook-form@7.57.0(react@18.3.1))
       '@iconscout/react-unicons':
-        specifier: ^1.1.6
-        version: 1.1.6(react@18.3.1)
+        specifier: ^2.2.4
+        version: 2.2.4(react@18.3.1)
       '@mantine/core':
         specifier: ^5.4.2
         version: 5.10.5(@emotion/react@11.14.0(@types/react@18.3.23)(react@18.3.1))(@mantine/hooks@5.10.5(react@18.3.1))(@types/react@18.3.23)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -511,8 +511,8 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@iconscout/react-unicons@1.1.6':
-    resolution: {integrity: sha512-BnyVvBew7Vm1lvL8+qyqjchUbkVHlDyNAlN+r5b+0P0KrkQ66BHPBuJEJ2faT89L8qRu+TohE7dHMV+bndje3Q==}
+  '@iconscout/react-unicons@2.2.4':
+    resolution: {integrity: sha512-lAgPSustUauaGF1u/dsrCePdfVt8pV8Wr13c5pqw5GBALZ9AZL4acwDwzNvDutgj5QPu0UBoTe/hLKhL/Sz3gQ==}
     peerDependencies:
       react: '>=15.0.0 <17.0.0'
 
@@ -2902,7 +2902,7 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@iconscout/react-unicons@1.1.6(react@18.3.1)':
+  '@iconscout/react-unicons@2.2.4(react@18.3.1)':
     dependencies:
       react: 18.3.1
 

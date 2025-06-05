@@ -6,6 +6,7 @@ import { QueryKeys } from '../lib/types';
 
 const MeContext = createContext<{
 	me: MeResponseType | undefined;
+	isLoading: boolean;
 	refetch: <TPageData>(
 		/* eslint-disable-next-line no-unused-vars */
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
@@ -19,7 +20,7 @@ const MeContextProvider = ({ children }: { children: ReactNode }) => {
 	const { data, refetch, isLoading } = useQuery([QueryKeys.ME], getMe);
 
 	return (
-		<MeContext.Provider value={{ me: data as MeResponseType, refetch }}>
+		<MeContext.Provider value={{ me: data as MeResponseType, refetch, isLoading }}>
 			{isLoading ? (
 				<div
 					style={{
