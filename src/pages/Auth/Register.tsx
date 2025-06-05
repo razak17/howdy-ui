@@ -7,7 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Input, Error } from '../../components/Input/Input';
 import { register } from '../../lib/api/auth';
 import { QueryKeys } from '../../lib/types';
-import { RegisterFormSchema, RegisterFormSchemaType } from '../../utils/formSchema';
+import {
+	RegisterFormSchema,
+	RegisterFormSchemaType
+} from '../../utils/formSchema';
 import Auth from './Auth';
 
 const RegisterForm = () => {
@@ -22,7 +25,11 @@ const RegisterForm = () => {
 		resolver: zodResolver(RegisterFormSchema)
 	});
 
-	const mutation = useMutation<string, AxiosError, Parameters<typeof register>['0']>(register, {
+	const mutation = useMutation<
+		string,
+		AxiosError,
+		Parameters<typeof register>['0']
+	>(register, {
 		onSuccess: () => {
 			navigate('/login', { replace: true });
 			queryClient.invalidateQueries([QueryKeys.ME]);
@@ -34,7 +41,10 @@ const RegisterForm = () => {
 	};
 
 	return (
-		<form className='info-form auth-form info-auth' onSubmit={handleSubmit(onSubmit)}>
+		<form
+			className='info-form auth-form info-auth'
+			onSubmit={handleSubmit(onSubmit)}
+		>
 			<h1>Register</h1>
 			{(mutation?.error?.response?.data as string) ? (
 				<Error error={mutation?.error?.response?.data as string} />

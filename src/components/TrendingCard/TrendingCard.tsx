@@ -1,20 +1,26 @@
+import { useNavigate } from 'react-router-dom';
 import { trending } from '../../lib/constants';
-import { Link } from 'react-router-dom';
 import './TrendingCard.css';
 
 const TrendingCard = () => {
+	const navigate = useNavigate();
+
 	return (
 		<div className='trending-card'>
 			<h3>Trends for you</h3>
 
 			{trending.map((trend, id) => {
 				return (
-					<Link to={`/search?q=${trend.name}`} key={id}>
-						<div className='trend' key={id}>
-							<span>{trend.name}</span>
-							<span>{trend.shares}k shares</span>
-						</div>
-					</Link>
+					<div
+						className='trend'
+						key={id}
+						onClick={() => {
+							navigate(`/search?q=${trend.name}`);
+						}}
+					>
+						<span>{trend.name}</span>
+						<span>{trend.shares}k shares</span>
+					</div>
 				);
 			})}
 		</div>
