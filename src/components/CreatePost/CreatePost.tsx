@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { AxiosError } from 'axios';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { UilScenery } from '@iconscout/react-unicons';
-import { UilPlayCircle } from '@iconscout/react-unicons';
+// import { UilPlayCircle } from '@iconscout/react-unicons';
 import { UilTimes } from '@iconscout/react-unicons';
 
 import { createPost } from '../../lib/api/post';
@@ -117,10 +117,10 @@ const CreatePost = () => {
 						<UilScenery />
 						Photo
 					</div>
-					<div className='option'>
-						<UilPlayCircle />
-						Video
-					</div>
+					{/* <div className='option'> */}
+					{/* 	<UilPlayCircle /> */}
+					{/* 	Video */}
+					{/* </div> */}
 					<button
 						className='button ps-button'
 						onClick={handleUpload}

@@ -191,10 +191,12 @@ const ProfileModal = ({
 					/>
 				</div>
 
+				<p> Profile image{profileProgress > 0 && `: ${profileProgress}`}</p>
 				<div className='form-item'>
-					<p> Profile image{profileProgress > 0 && `: ${profileProgress}`}</p>
 					<input type='file' accept='image/*' name='profile' onChange={onImageChange} />
-					<p>Cover image{coverProgress > 0 && `: ${coverProgress}`}</p>
+				</div>
+				<p>Cover image{coverProgress > 0 && `: ${coverProgress}%`}</p>
+				<div className='form-item'>
 					<input type='file' accept='image/*' name='cover' onChange={onImageChange} />
 				</div>
 
