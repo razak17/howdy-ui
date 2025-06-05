@@ -186,7 +186,7 @@ a {
 	padding: 0.8rem 1rem;
 	margin-top: 1rem;
 	width: 100%;
-	border: 2px solid var(--orange);
+	border: 2px solid var(--button-bg);
 }
 
 .form-item {
