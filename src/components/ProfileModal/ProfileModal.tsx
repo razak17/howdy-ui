@@ -1,12 +1,24 @@
 import { Modal, useMantineTheme } from '@mantine/core';
 import { useMutation, useQueryClient } from 'react-query';
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {
+	ChangeEvent,
+	Dispatch,
+	SetStateAction,
+	useEffect,
+	useState
+} from 'react';
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL
+} from 'firebase/storage';
 import { AxiosError } from 'axios';
 
 import app from '../../lib/firebase';
 import { updateUser } from '../../lib/api/users';
 import { IUser, QueryKeys } from '../../lib/types';
+import { validateFile } from '../../utils/validateFile';
 
 const ProfileModal = ({
 	modalOpened,
@@ -19,8 +31,10 @@ const ProfileModal = ({
 }) => {
 	const [profilePicture, setProfilePicture] = useState<File | null>(null);
 	const [coverPicture, setCoverPicture] = useState<File | null>(null);
+	const [fileError, setFileError] = useState<string>('');
 
-	const { firstName, lastName, workplace, city, country, relationshipStatus } = user;
+	const { firstName, lastName, workplace, city, country, relationshipStatus } =
+		user;
 
 	const [formData, setFormData] = useState({
 		firstName,
@@ -45,13 +59,25 @@ const ProfileModal = ({
 	};
 
 	const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files) {
+		setFileError('');
+		if (e.target.files && e.target.files[0]) {
 			const img = e.target.files[0];
+			const validationError = validateFile(img);
+			if (validationError) {
+				setFileError(validationError);
+				if (e.target) {
+					e.target.value = '';
+				}
+				return;
+			}
 			e.target.name === 'profile' ? setProfilePicture(img) : setCoverPicture(img);
 		}
 	};
 
-	const uploadFile = (file: File, urlType: 'profilePicture' | 'coverPicture') => {
+	const uploadFile = (
+		file: File,
+		urlType: 'profilePicture' | 'coverPicture'
+	) => {
 		const storage = getStorage(app);
 		const fileName = new Date().getTime() + file.name;
 		const storageRef = ref(storage, fileName);
@@ -61,7 +87,6 @@ const ProfileModal = ({
 			'state_changed',
 			(snapshot) => {
 				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-				/* eslint-disable-next-line max-len */
 				urlType === 'profilePicture'
 					? setProfileProgress(Math.round(progress))
 					: setCoverProgress(Math.round(progress));
@@ -91,8 +116,11 @@ const ProfileModal = ({
 		);
 	};
 
-	/* eslint-disable-next-line max-len */
-	const mutation = useMutation<IUser, AxiosError, Parameters<typeof updateUser>['0']>(updateUser, {
+	const mutation = useMutation<
+		IUser,
+		AxiosError,
+		Parameters<typeof updateUser>['0']
+	>(updateUser, {
 		onSuccess: () => {
 			queryClient.invalidateQueries([QueryKeys.USER_PROFILE]);
 			queryClient.invalidateQueries([QueryKeys.USER_POSTS]);
@@ -104,6 +132,7 @@ const ProfileModal = ({
 			if (coverPicture) {
 				setCoverPicture(null);
 			}
+			setFileError('');
 		}
 	});
 
@@ -191,13 +220,32 @@ const ProfileModal = ({
 					/>
 				</div>
 
+				{fileError && (
+					<div
+						className='file-error'
+						style={{ color: 'red', fontSize: '14px', margin: '8px 0' }}
+					>
+						{fileError}
+					</div>
+				)}
+
 				<p> Profile image{profileProgress > 0 && `: ${profileProgress}`}</p>
 				<div className='form-item'>
-					<input type='file' accept='image/*' name='profile' onChange={onImageChange} />
+					<input
+						type='file'
+						accept='image/*'
+						name='profile'
+						onChange={onImageChange}
+					/>
 				</div>
 				<p>Cover image{coverProgress > 0 && `: ${coverProgress}%`}</p>
 				<div className='form-item'>
-					<input type='file' accept='image/*' name='cover' onChange={onImageChange} />
+					<input
+						type='file'
+						accept='image/*'
+						name='cover'
+						onChange={onImageChange}
+					/>
 				</div>
 
 				<button disabled={uploading} className='button info-button' type='submit'>

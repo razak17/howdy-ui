@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { format } from 'timeago.js';
 
-import Comment from '../../assets/comment.png';
-import Share from '../../assets/share.png';
+// import Comment from '../../assets/comment.png';
+// import Share from '../../assets/share.png';
 import Heart from '../../assets/like.png';
 import NotLike from '../../assets/notlike.png';
 import { IPost, QueryKeys } from '../../lib/types';
@@ -23,7 +23,6 @@ const Post = ({ post }: { post: IPost }) => {
 
 	const mutation = useMutation<string, AxiosError, Parameters<typeof likePost>['0']>(likePost, {
 		onSuccess: () => {
-			/* eslint-disable-next-line max-len */
 			queryClient.invalidateQueries([QueryKeys.POSTS]);
 			queryClient.invalidateQueries([QueryKeys.SEARCH]);
 			queryClient.invalidateQueries([QueryKeys.USER_POSTS]);
@@ -62,8 +61,8 @@ const Post = ({ post }: { post: IPost }) => {
 					alt=''
 					onClick={handleLike}
 				/>
-				<img src={Comment} alt='comment' />
-				<img src={Share} alt='share' />
+				{/* <img src={Comment} alt='comment' /> */}
+				{/* <img src={Share} alt='share' /> */}
 			</div>
 
 			<span className='likes'>

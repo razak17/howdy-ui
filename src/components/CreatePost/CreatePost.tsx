@@ -1,7 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { AxiosError } from 'axios';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL
+} from 'firebase/storage';
 import { UilScenery } from '@iconscout/react-unicons';
 // import { UilPlayCircle } from '@iconscout/react-unicons';
 import { UilTimes } from '@iconscout/react-unicons';
@@ -13,18 +18,31 @@ import app from '../../lib/firebase';
 import './CreatePost.css';
 import { useMe } from '../../context/me';
 import { getUser } from '../../lib/api/users';
+import { validateFile } from '../../utils/validateFile';
 
 const CreatePost = () => {
 	const [image, setImage] = useState<File | null>(null);
 	const [imageUrl, setImageUrl] = useState('');
 	const [uploading, setUploading] = useState(false);
+	const [fileError, setFileError] = useState<string>('');
 
 	const queryClient = useQueryClient();
 	const { me } = useMe();
 
-	const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setFileError('');
 		if (e.target.files && e.target.files[0]) {
 			const img = e.target.files[0];
+
+			const validationError = validateFile(img);
+			if (validationError) {
+				setFileError(validationError);
+				if (e.target) {
+					e.target.value = '';
+				}
+				return;
+			}
+
 			setImage(img);
 		}
 	};
@@ -66,12 +84,16 @@ const CreatePost = () => {
 	const imageRef = useRef<HTMLInputElement>(null);
 	const desc = useRef<HTMLTextAreaElement>(null);
 
-	/* eslint-disable-next-line max-len */
-	const mutation = useMutation<IPost, AxiosError, Parameters<typeof createPost>['0']>(createPost, {
+	const mutation = useMutation<
+		IPost,
+		AxiosError,
+		Parameters<typeof createPost>['0']
+	>(createPost, {
 		onSuccess: () => {
 			queryClient.invalidateQueries([QueryKeys.POSTS]);
 			if (image) {
 				setImage(null);
+				setFileError('');
 			}
 			if (desc.current?.value) {
 				desc.current.value = '';
@@ -112,6 +134,14 @@ const CreatePost = () => {
 				<div className='text-textarea'>
 					<textarea rows={5} placeholder="What's happening?" ref={desc} />
 				</div>
+				{fileError && (
+					<div
+						className='file-error'
+						style={{ color: 'red', fontSize: '14px', margin: '8px 0' }}
+					>
+						{fileError}
+					</div>
+				)}
 				<div className='post-options'>
 					<div className='option' onClick={() => imageRef.current?.click()}>
 						<UilScenery />
@@ -129,8 +159,12 @@ const CreatePost = () => {
 						{mutation.isLoading || uploading ? 'uploading' : 'Post'}
 					</button>
 					<div style={{ display: 'none' }}>
-						{/* eslint-disable-next-line max-len */}
-						<input type='file' accept='image/*' ref={imageRef} onChange={onImageChange} />
+						<input
+							type='file'
+							accept='image/*'
+							ref={imageRef}
+							onChange={onImageChange}
+						/>
 					</div>
 				</div>
 
