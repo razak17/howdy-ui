@@ -9,7 +9,7 @@ export const trending = [
 		shares: 97
 	},
 	{
-		name: 'Real Madrid',
+		name: 'Madrid',
 		shares: 80.5
 	},
 	{

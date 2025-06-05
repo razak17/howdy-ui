@@ -8,7 +8,7 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
 
 				<div className='web-name'>
 					<h1> Howwdy</h1>
-					<p>Explore the ideas throughout the world!</p>
+					<p>Explore ideas throughout the world!</p>
 				</div>
 			</div>
 			<div className='auth-right'>{children}</div>

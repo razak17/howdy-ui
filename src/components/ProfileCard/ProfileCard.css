@@ -120,6 +120,6 @@
 
 @media (max-width: 756px) {
 	.profile-card {
-		display: none;
+		/* display: none; */
 	}
 }

@@ -2,10 +2,11 @@
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
-	height: 100vh;
+	/* height: 100vh; */
 	overflow: auto;
 	padding-bottom: 2rem;
 	padding-right: 10px;
+  width: 23rem;
 }
 
 .nav-icons {
