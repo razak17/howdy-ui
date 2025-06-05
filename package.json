@@ -1,5 +1,5 @@
 {
-	"name": "mern-social-server",
+	"name": "mern-social-client",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
