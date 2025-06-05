@@ -16,7 +16,11 @@ const LoginForm = () => {
 	const state = useLocation();
 	const queryClient = useQueryClient();
 
-	const mutation = useMutation<string, AxiosError, Parameters<typeof login>['0']>(login, {
+	const mutation = useMutation<
+		string,
+		AxiosError,
+		Parameters<typeof login>['0']
+	>(login, {
 		onSuccess: async () => {
 			// Wait for the ME query to refetch and complete
 			await queryClient.invalidateQueries([QueryKeys.ME]);
@@ -37,14 +41,22 @@ const LoginForm = () => {
 		mutation.mutate(data);
 	};
 	return (
-		<form className='info-form auth-form info-auth' onSubmit={handleSubmit(onSubmit)}>
+		<form
+			className='info-form auth-form info-auth'
+			onSubmit={handleSubmit(onSubmit)}
+		>
 			<h1>Login</h1>
 			{(mutation?.error?.response?.data as string) ? (
 				<Error error={mutation?.error?.response?.data as string} />
 			) : null}
 			<div className='form-item'>
-				{/* eslint-disable-next-line max-len */}
-				<Input required type='text' placeholder='Email' {...loginForm('email')} error={errors.email} />
+				<Input
+					required
+					type='text'
+					placeholder='Email'
+					{...loginForm('email')}
+					error={errors.email}
+				/>
 			</div>
 			<div className='form-item'>
 				<Input

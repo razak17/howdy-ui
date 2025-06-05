@@ -20,19 +20,21 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 
 	const { me } = useMe();
 
-
 	const usersWithoutCurrent = users.filter((user) => user._id !== me?._id);
 
-  const otherUsersExist = usersWithoutCurrent.length > 1;
+	const otherUsersExist = usersWithoutCurrent.length > 1;
 
 	let filteredUsers =
-		users && otherUsersExist ? [usersWithoutCurrent[0], usersWithoutCurrent[1]] : null;
+		users && otherUsersExist
+			? [usersWithoutCurrent[0], usersWithoutCurrent[1]]
+			: null;
 
 	if (location === 'modal') {
 		filteredUsers = users;
 	}
 
-	if (!otherUsersExist) <div className='followers-card'>No Other users found</div>;
+	if (!otherUsersExist)
+		<div className='followers-card'>No Other users found</div>;
 
 	return (
 		<div className='followers-card'>
@@ -43,7 +45,6 @@ const FollowersCard = ({ location, users, isLoading }: IProps) => {
 					<div key={user._id} className='follower'>
 						<div>
 							<img
-								/* eslint-disable-next-line max-len */
 								src={user.profilePicture ? user.profilePicture : defaultProfileImg}
 								alt='profileImage'
 								className='profile-image'

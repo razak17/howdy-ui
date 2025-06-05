@@ -10,7 +10,6 @@ const MeContext = createContext<{
 	refetch: <TPageData>(
 		/* eslint-disable-next-line no-unused-vars */
 		options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-		/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 	) => any;
 	remove?: () => void;
 	// @ts-ignore
@@ -20,7 +19,9 @@ const MeContextProvider = ({ children }: { children: ReactNode }) => {
 	const { data, refetch, isLoading } = useQuery([QueryKeys.ME], getMe);
 
 	return (
-		<MeContext.Provider value={{ me: data as MeResponseType, refetch, isLoading }}>
+		<MeContext.Provider
+			value={{ me: data as MeResponseType, refetch, isLoading }}
+		>
 			{isLoading ? (
 				<div
 					style={{
