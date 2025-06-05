@@ -4,6 +4,8 @@
 
 Built with React.
 
+You can find the server code at: ![howdy-server](https://github.com/razak17/howdy-server)
+
 ## Technologies used
 
 - React
