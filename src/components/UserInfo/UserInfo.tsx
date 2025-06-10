@@ -28,7 +28,7 @@ const UserInfo = () => {
 		onSuccess: () => {
 			refetch();
 			navigate('/login', { replace: true });
-      window.location.reload();
+      // window.location.reload();
 		}
 	});
 
